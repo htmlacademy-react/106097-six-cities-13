@@ -1,6 +1,10 @@
-import PlaceCard from "../components/place-card";
+import PlaceCard from '../components/place-card';
 
-export default function Homepage(): JSX.Element {
+type HomepageProps = {
+  placesCount: number;
+}
+
+export default function Homepage({placesCount}: HomepageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,11 +115,7 @@ export default function Homepage(): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+                {Array.from({length: placesCount}, (_, i) => <PlaceCard key={i} />)}
               </div>
             </section>
             <div className="cities__right-section">
