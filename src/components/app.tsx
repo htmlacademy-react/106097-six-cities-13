@@ -1,5 +1,6 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import Homepage from '../pages/homepage';
+import NotFound from '../pages/not-found';
 import { AppRoute } from '../const';
 import Login from '../pages/login';
 import Favorites from '../pages/favorites';
@@ -18,6 +19,7 @@ export default function App({placesCount}: AppProps): JSX.Element {
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Favorites} element={<Favorites />} />
           <Route path={AppRoute.Offer} element={<Offer />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
