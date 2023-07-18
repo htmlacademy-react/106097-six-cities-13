@@ -1,6 +1,11 @@
+import { Helmet } from 'react-helmet-async';
+
 export default function Login() {
   return (
     <div className="page page--gray page--login">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
