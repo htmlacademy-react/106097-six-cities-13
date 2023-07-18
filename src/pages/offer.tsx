@@ -1,6 +1,11 @@
+import { Helmet } from 'react-helmet-async';
+
 export default function Offer() {
   return (
     <div className="page">
+      <Helmet>
+        <title>Offer details</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

@@ -1,4 +1,5 @@
 import PlaceCard from '../components/place-card';
+import { Helmet } from 'react-helmet-async';
 
 type HomepageProps = {
   placesCount: number;
@@ -7,6 +8,9 @@ type HomepageProps = {
 export default function Homepage({placesCount}: HomepageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
+      <Helmet>
+        <title>6 cities homepage</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

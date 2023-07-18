@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 export default function NotFound() {
   return (
     <div className="page">
+      <Helmet>
+        <title>Page not found</title>
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
