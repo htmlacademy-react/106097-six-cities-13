@@ -17,11 +17,24 @@ export default function App({placesCount}: AppProps): JSX.Element {
       <Routes>
         <Route path={AppRoute.Root}>
           <Route index element={<Homepage placesCount={placesCount}/>} />
-          <Route path={AppRoute.Login} element={<Login />} />
+          <Route
+            path={AppRoute.Login}
+            element={
+              <PrivateRoute
+                restrictedFor={AuthorizationStatus.Auth}
+                redirectTo={AppRoute.Root}
+              >
+                <Login/>
+              </PrivateRoute>
+            }
+          />
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+              <PrivateRoute
+                restrictedFor={AuthorizationStatus.NoAuth}
+                redirectTo={AppRoute.Login}
+              >
                 <Favorites />
               </PrivateRoute>
             }
