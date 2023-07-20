@@ -1,4 +1,4 @@
-const offers = [
+export const offers = [
   {
     'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
     'title': 'Beautiful & luxurious studio at great location',
