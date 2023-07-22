@@ -108,7 +108,7 @@ export const offers = [
     'maxAdults': 3
   },
   {
-    'id': 'e0b462a27f00',
+    'id': '1',
     'title': 'Kvartira dlya sema',
     'type': 'apartment',
     'price': 10,
@@ -126,7 +126,7 @@ export const offers = [
       'zoom': 8
     },
     'isFavorite': false,
-    'isPremium': false,
+    'isPremium': true,
     'rating': 3,
     'description': 'Flat in front of Kremlin.',
     'bedrooms': 5,
