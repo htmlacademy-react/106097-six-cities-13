@@ -1,11 +1,12 @@
 import PlaceCard from '../components/place-card';
 import { Helmet } from 'react-helmet-async';
+import { Offers } from '../types/offer';
 
 type HomepageProps = {
-  placesCount: number;
+  offers: Offers;
 }
 
-export default function Homepage({placesCount}: HomepageProps): JSX.Element {
+export default function Homepage({offers}: HomepageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -119,7 +120,7 @@ export default function Homepage({placesCount}: HomepageProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: placesCount}, (_, i) => <PlaceCard key={i} />)}
+                {offers.map((element) => <PlaceCard offer={element} key={element.id} />)}
               </div>
             </section>
             <div className="cities__right-section">

@@ -110,7 +110,7 @@ export const offers = [
   {
     'id': '1',
     'title': 'Kvartira dlya sema',
-    'type': 'apartment',
+    'type': 'private room',
     'price': 10,
     'city': {
       'name': 'Moscow',
@@ -125,7 +125,7 @@ export const offers = [
       'longitude': 5,
       'zoom': 8
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': true,
     'rating': 3,
     'description': 'Flat in front of Kremlin.',
