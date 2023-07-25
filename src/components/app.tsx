@@ -38,7 +38,7 @@ export default function App({offers}: AppProps): JSX.Element {
                   restrictedFor={AuthorizationStatus.NoAuth}
                   redirectTo={AppRoute.Login}
                 >
-                  <Favorites />
+                  <Favorites offers={offers} />
                 </PrivateRoute>
               }
             />
