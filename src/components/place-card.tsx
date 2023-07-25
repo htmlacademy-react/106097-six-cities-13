@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Offer } from '../types/offer';
 
 type PlaceCardProps = {
@@ -5,8 +6,10 @@ type PlaceCardProps = {
 };
 
 export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+  const [, setActiveCard] = useState('');
+
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={() => setActiveCard(offer.id)} onMouseOut={() => setActiveCard('')}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
 
