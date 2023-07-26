@@ -4,19 +4,33 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../const';
 
 type PlaceCardProps = {
-  offer: Offer;
+  id: string;
+  images: string[];
+  price: number;
+  isFavorite: boolean;
+  rating: number;
+  title: string;
+  type: string;
 };
 
-export default function PlaceCard({offer}: PlaceCardProps) {
+export default function PlaceCard({
+  id,
+  images,
+  price,
+  isFavorite,
+  rating,
+  title,
+  type
+}: PlaceCardProps) {
   const [, setActiveCard] = useState('');
 
   return (
-    <article className="cities__card place-card" onMouseOver={() => setActiveCard(offer.id)} onMouseOut={() => setActiveCard('')}>
+    <article className="cities__card place-card" onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`${AppRoute.Offer}/${offer.id}`}>
+        <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
-            src={offer.images[0] ? offer.images[0] : '#'}
+            src={images[0] ? images[0] : '#'}
             width="260"
             height="200"
             alt="Place image"
@@ -26,11 +40,11 @@ export default function PlaceCard({offer}: PlaceCardProps) {
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{offer.price}</b>
+            <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
           >
             <svg
@@ -45,14 +59,14 @@ export default function PlaceCard({offer}: PlaceCardProps) {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating / 5 * 100}%` }} />
+            <span style={{ width: `${rating / 5 * 100}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
+          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

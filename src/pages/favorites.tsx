@@ -34,7 +34,18 @@ export default function Favorites({favoriteOffers}: FavoritesProps) {
                     </div>
                   </div>
                   <div className="favorites__places">
-                    {favoriteOffers.filter((offer) => offer.city.name === city).map((element) => (<FavoriteCard key={element.id} offer={element} />))}
+                    {favoriteOffers.filter((offer) => offer.city.name === city).map((element) => (
+                      <FavoriteCard
+                        key={element.id}
+                        id={element.id}
+                        isPremium={element.isPremium}
+                        images={element.images}
+                        price={element.price}
+                        isFavorite={element.isFavorite}
+                        rating={element.rating}
+                        title={element.title}
+                        type={element.type}
+                      />))}
                   </div>
                 </li>
               ))}
