@@ -1,12 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import { Offers } from '../types/offer';
-import Header from '../components/header';
+import { Header } from '../components/header';
 
 type LoginProps = {
   favoriteOffers: Offers;
 }
 
-export default function Login({favoriteOffers}: LoginProps) {
+export function Login({favoriteOffers}: LoginProps) {
   return (
     <div className="page page--gray page--login">
       <Helmet>

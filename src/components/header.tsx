@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offers } from '../types/offer';
-import HeaderNavigation from './header-navigation';
+import { HeaderNavigation } from './header-navigation';
 import { AppRoute } from '../const';
 import { useLocation } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ type HeaderProps = {
   isNavigationOn: string;
 }
 
-export default function Header({favoriteOffers, isNavigationOn}: HeaderProps) {
+export function Header({favoriteOffers, isNavigationOn}: HeaderProps) {
   return (
     <header className="header">
       <div className="container">

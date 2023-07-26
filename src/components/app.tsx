@@ -1,19 +1,19 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import Homepage from '../pages/homepage';
-import NotFound from '../pages/not-found';
+import { Homepage } from '../pages/homepage';
+import { NotFound } from '../pages/not-found';
 import { AppRoute, AuthorizationStatus } from '../const';
-import Login from '../pages/login';
-import Favorites from '../pages/favorites';
-import PrivateRoute from './private-route';
+import { Login } from '../pages/login';
+import { Favorites } from '../pages/favorites';
+import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { Offers } from '../types/offer';
-import OfferComponent from '../pages/offer';
+import { OfferComponent } from '../pages/offer';
 
 type AppProps = {
     offers: Offers;
 }
 
-export default function App({offers}: AppProps) {
+export function App({offers}: AppProps) {
   const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
 
   return (

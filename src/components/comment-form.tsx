@@ -12,7 +12,7 @@ const ratingMap = {
   '1': 'terribly'
 };
 
-export default function CommentForm() {
+export function CommentForm() {
   const [formData, setFormData] = useState({
     rating: '',
     review: '',

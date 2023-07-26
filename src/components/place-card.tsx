@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Offer } from '../types/offer';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../const';
 
@@ -13,7 +12,7 @@ type PlaceCardProps = {
   type: string;
 };
 
-export default function PlaceCard({
+export function PlaceCard({
   id,
   images,
   price,

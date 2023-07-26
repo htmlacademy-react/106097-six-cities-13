@@ -4,15 +4,15 @@ import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../const';
 import { capitalizeFirstLetter } from '../utils';
-import Header from '../components/header';
-import CommentForm from '../components/comment-form';
+import { Header } from '../components/header';
+import { CommentForm } from '../components/comment-form';
 
 type OfferProps = {
   offers: Offers;
   favoriteOffers: Offers;
 };
 
-export default function OfferComponent({offers, favoriteOffers}: OfferProps) {
+export function OfferComponent({offers, favoriteOffers}: OfferProps) {
   const { id: offerId } = useParams();
   const offer: Offer = offers.filter((item) => item.id === offerId)[0];
   if (!offer) {

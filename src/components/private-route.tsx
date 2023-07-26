@@ -7,7 +7,7 @@ type PrivateRouteProps = {
   children: JSX.Element;
 }
 
-export default function PrivateRoute({
+export function PrivateRoute({
   restrictedFor,
   redirectTo,
   children

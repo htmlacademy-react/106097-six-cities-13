@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Offers } from '../types/offer';
-import Header from '../components/header';
+import { Header } from '../components/header';
 
 type NotFoundProps = {
   favoriteOffers: Offers;
 }
 
-export default function NotFound({favoriteOffers}: NotFoundProps) {
+export function NotFound({favoriteOffers}: NotFoundProps) {
   return (
     <div className="page">
       <Helmet>

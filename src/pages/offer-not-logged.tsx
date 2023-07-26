@@ -1,11 +1,11 @@
 import { Offers } from '../types/offer';
-import Header from '../components/header';
+import { Header } from '../components/header';
 
 type OfferNotLoggedProps = {
   favoriteOffers: Offers;
 }
 
-export default function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps) {
+export function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps) {
   return (
     <div className="page">
       <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>

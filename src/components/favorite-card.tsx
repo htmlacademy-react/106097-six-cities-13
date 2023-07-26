@@ -12,7 +12,7 @@ type FavoriteCardProps = {
   type: string;
 }
 
-export default function FavoriteCard({
+export function FavoriteCard({
   id,
   isPremium,
   images,

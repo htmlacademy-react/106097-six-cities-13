@@ -1,14 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import { Offers } from '../types/offer';
-import PlaceCardList from '../components/place-card-list';
-import Header from '../components/header';
+import { PlaceCardList } from '../components/place-card-list';
+import { Header } from '../components/header';
 
 type HomepageProps = {
   offers: Offers;
   favoriteOffers: Offers;
 }
 
-export default function Homepage({offers, favoriteOffers}: HomepageProps) {
+export function Homepage({offers, favoriteOffers}: HomepageProps) {
   return (
     <div className="page page--gray page--main">
       <Helmet>
