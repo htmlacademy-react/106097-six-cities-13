@@ -1,17 +1,25 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { ChangeEvent } from 'react';
 
 const MIN_COMMENTS_LENGTH = 50;
 const MAX_COMMENTS_LENGTH = 500;
 
+const ratingMap = {
+  '5': 'perfect',
+  '4': 'good',
+  '3': 'not bad',
+  '2': 'badly',
+  '1': 'terribly'
+};
+
 export default function CommentForm() {
   const [formData, setFormData] = useState({
-    rating: 0,
+    rating: '',
     review: '',
   });
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, rating: Number(evt.target.value)});
+    setFormData({...formData, rating: evt.target.value});
   };
 
   const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
@@ -20,7 +28,7 @@ export default function CommentForm() {
 
   const isValid = formData.review.length >= MIN_COMMENTS_LENGTH
   && formData.review.length <= MAX_COMMENTS_LENGTH
-  && formData.rating !== 0;
+  && formData.rating !== '';
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -28,91 +36,30 @@ export default function CommentForm() {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          value="5"
-          id="5-stars"
-          type="radio"
-          onChange={handleRatingChange}
-        />
-        <label
-          htmlFor="5-stars"
-          className="reviews__rating-label form__rating-label"
-          title="perfect"
-        >
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          value="4"
-          id="4-stars"
-          type="radio"
-          onChange={handleRatingChange}
-        />
-        <label
-          htmlFor="4-stars"
-          className="reviews__rating-label form__rating-label"
-          title="good"
-        >
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          value="3"
-          id="3-stars"
-          type="radio"
-          onChange={handleRatingChange}
-        />
-        <label
-          htmlFor="3-stars"
-          className="reviews__rating-label form__rating-label"
-          title="not bad"
-        >
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          value="2"
-          id="2-stars"
-          type="radio"
-          onChange={handleRatingChange}
-        />
-        <label
-          htmlFor="2-stars"
-          className="reviews__rating-label form__rating-label"
-          title="badly"
-        >
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
-        <input
-          className="form__rating-input visually-hidden"
-          name="rating"
-          value="1"
-          id="1-star"
-          type="radio"
-          onChange={handleRatingChange}
-        />
-        <label
-          htmlFor="1-star"
-          className="reviews__rating-label form__rating-label"
-          title="terribly"
-        >
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star" />
-          </svg>
-        </label>
+        {Object.entries(ratingMap)
+          .reverse()
+          .map(([score, title]) => (
+            <Fragment key={score}>
+              <input
+                className="form__rating-input visually-hidden"
+                name="rating"
+                value={score}
+                id={`${score}-stars`}
+                type="radio"
+                checked={formData.rating === score}
+                onChange={handleRatingChange}
+              />
+              <label
+                htmlFor={`${score}-stars`}
+                className="reviews__rating-label form__rating-label"
+                title={title}
+              >
+                <svg className="form__star-image" width="37" height="33">
+                  <use xlinkHref="#icon-star" />
+                </svg>
+              </label>
+            </Fragment>
+          ))}
       </div>
       <textarea
         className="reviews__textarea form__textarea"
