@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { ChangeEvent } from 'react';
 
+const MIN_COMMENTS_LENGTH = 50;
+const MAX_COMMENTS_LENGTH = 500;
+
 export default function CommentForm() {
   const [formData, setFormData] = useState({
-    rating: 5,
+    rating: 0,
     review: '',
   });
 
@@ -14,6 +17,10 @@ export default function CommentForm() {
   const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData({...formData, review: evt.target.value});
   };
+
+  const isValid = formData.review.length >= MIN_COMMENTS_LENGTH
+  && formData.review.length <= MAX_COMMENTS_LENGTH
+  && formData.rating !== 0;
 
   return (
     <form className="reviews__form form" action="#" method="post">
@@ -113,18 +120,19 @@ export default function CommentForm() {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewChange}
+        value={formData.review}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe
           your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{MIN_COMMENTS_LENGTH} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={!isValid}
         >
           Submit
         </button>
