@@ -27,7 +27,7 @@ export default function App({offers}: AppProps): JSX.Element {
                   restrictedFor={AuthorizationStatus.Auth}
                   redirectTo={AppRoute.Root}
                 >
-                  <Login/>
+                  <Login offers={offers} />
                 </PrivateRoute>
               }
             />
@@ -43,8 +43,8 @@ export default function App({offers}: AppProps): JSX.Element {
               }
             />
             <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} />} />
-            <Route path={AppRoute.NotFound} element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path={AppRoute.NotFound} element={<NotFound offers={offers} />} />
+            <Route path="*" element={<NotFound offers={offers} />} />
           </Route>
         </Routes>
       </BrowserRouter>
