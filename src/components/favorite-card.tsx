@@ -1,46 +1,52 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../const';
 
-type PlaceCardProps = {
+type FavoriteCardProps = {
   id: string;
+  isPremium: boolean;
   images: string[];
   price: number;
   isFavorite: boolean;
   rating: number;
   title: string;
   type: string;
-};
+}
 
-export function PlaceCard({
+export function FavoriteCard({
   id,
+  isPremium,
   images,
   price,
   isFavorite,
   rating,
   title,
   type
-}: PlaceCardProps) {
-  const [, setActiveCard] = useState('');
-
+}: FavoriteCardProps) {
   return (
-    <article className="cities__card place-card" onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className="favorites__card place-card">
+      {isPremium ? (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      ) : null}
+      <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
             src={images[0] ? images[0] : '#'}
-            width="260"
-            height="200"
+            width="150"
+            height="110"
             alt="Place image"
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>
-            <span className="place-card__price-text">/&nbsp;night</span>
+            <span className="place-card__price-text">
+              /&nbsp;night
+            </span>
           </div>
           <button
             className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
