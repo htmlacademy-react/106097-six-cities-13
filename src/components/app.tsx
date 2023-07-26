@@ -34,12 +34,12 @@ export default function App({offers}: AppProps): JSX.Element {
             <Route
               path={AppRoute.Favorites}
               element={
-                <PrivateRoute
-                  restrictedFor={AuthorizationStatus.NoAuth}
-                  redirectTo={AppRoute.Login}
-                >
+                // <PrivateRoute
+                //   restrictedFor={AuthorizationStatus.NoAuth}
+                //   redirectTo={AppRoute.Login}
+                // >
                   <Favorites offers={offers} />
-                </PrivateRoute>
+                // </PrivateRoute>
               }
             />
             <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} />} />

@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../types/offer';
+import { AppRoute } from '../const';
 
 type FavoriteCardProps = {
   offer: Offer;
@@ -13,7 +15,7 @@ export default function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
         </div>
       ) : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.images[0] ? offer.images[0] : '#'}
@@ -21,7 +23,7 @@ export default function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
             height="110"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -52,7 +54,7 @@ export default function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

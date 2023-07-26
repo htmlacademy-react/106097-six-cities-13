@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Offer } from '../types/offer';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../const';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -11,8 +13,7 @@ export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
   return (
     <article className="cities__card place-card" onMouseOver={() => setActiveCard(offer.id)} onMouseOut={() => setActiveCard('')}>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
             src={offer.images[0] ? offer.images[0] : '#'}
@@ -20,7 +21,7 @@ export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
             height="200"
             alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -49,7 +50,7 @@ export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
