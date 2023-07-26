@@ -9,9 +9,10 @@ import CommentForm from '../components/comment-form';
 
 type OfferProps = {
   offers: Offers;
+  favoriteOffers: Offers;
 };
 
-export default function OfferComponent({offers}: OfferProps): JSX.Element {
+export default function OfferComponent({offers, favoriteOffers}: OfferProps): JSX.Element {
   const { id: offerId } = useParams();
   const offer: Offer = offers.filter((item) => item.id === offerId)[0];
   if (!offer) {
@@ -23,7 +24,7 @@ export default function OfferComponent({offers}: OfferProps): JSX.Element {
       <Helmet>
         <title>Offer details</title>
       </Helmet>
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

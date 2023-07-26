@@ -14,12 +14,14 @@ type AppProps = {
 }
 
 export default function App({offers}: AppProps): JSX.Element {
+  const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root}>
-            <Route index element={<Homepage offers={offers}/>} />
+            <Route index element={<Homepage offers={offers} favoriteOffers={favoriteOffers}/>} />
             <Route
               path={AppRoute.Login}
               element={
@@ -27,7 +29,7 @@ export default function App({offers}: AppProps): JSX.Element {
                   restrictedFor={AuthorizationStatus.Auth}
                   redirectTo={AppRoute.Root}
                 >
-                  <Login offers={offers} />
+                  <Login favoriteOffers={favoriteOffers} />
                 </PrivateRoute>
               }
             />
@@ -38,13 +40,13 @@ export default function App({offers}: AppProps): JSX.Element {
                   restrictedFor={AuthorizationStatus.NoAuth}
                   redirectTo={AppRoute.Login}
                 >
-                  <Favorites offers={offers} />
+                  <Favorites favoriteOffers={favoriteOffers} />
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} />} />
-            <Route path={AppRoute.NotFound} element={<NotFound offers={offers} />} />
-            <Route path="*" element={<NotFound offers={offers} />} />
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} favoriteOffers={favoriteOffers}/>} />
+            <Route path={AppRoute.NotFound} element={<NotFound favoriteOffers={favoriteOffers} />} />
+            <Route path="*" element={<NotFound favoriteOffers={favoriteOffers} />} />
           </Route>
         </Routes>
       </BrowserRouter>

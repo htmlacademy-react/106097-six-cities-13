@@ -2,13 +2,13 @@ import { Offers } from '../types/offer';
 import Header from '../components/header';
 
 type OfferNotLoggedProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function OfferNotLogged({offers}: OfferNotLoggedProps): JSX.Element {
+export default function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps): JSX.Element {
   return (
     <div className="page">
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

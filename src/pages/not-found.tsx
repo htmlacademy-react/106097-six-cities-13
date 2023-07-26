@@ -4,16 +4,16 @@ import { Offers } from '../types/offer';
 import Header from '../components/header';
 
 type NotFoundProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function NotFound({offers}: NotFoundProps): JSX.Element {
+export default function NotFound({favoriteOffers}: NotFoundProps): JSX.Element {
   return (
     <div className="page">
       <Helmet>
         <title>Page not found</title>
       </Helmet>
-      <Header offers={offers} isNavigationOn='false'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='false'/>
       <main className="page__main page__main--login">
         <div className="container">
           <section>

@@ -1,12 +1,10 @@
 import { Offers } from '../types/offer';
 
 type HeaderNavigationProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function HeaderNavigation({offers}: HeaderNavigationProps): JSX.Element {
-  const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
-
+export default function HeaderNavigation({favoriteOffers}: HeaderNavigationProps): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

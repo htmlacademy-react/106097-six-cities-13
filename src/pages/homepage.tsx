@@ -5,15 +5,16 @@ import Header from '../components/header';
 
 type HomepageProps = {
   offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function Homepage({offers}: HomepageProps): JSX.Element {
+export default function Homepage({offers, favoriteOffers}: HomepageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 cities homepage</title>
       </Helmet>
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

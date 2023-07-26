@@ -3,16 +3,16 @@ import { Offers } from '../types/offer';
 import Header from '../components/header';
 
 type LoginProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function Login({offers}: LoginProps): JSX.Element {
+export default function Login({favoriteOffers}: LoginProps): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <Header offers={offers} isNavigationOn='false'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='false'/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

@@ -2,13 +2,13 @@ import { Offers } from '../types/offer';
 import Header from '../components/header';
 
 type HomepageEmptyProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function HomepageEmpty({offers}: HomepageEmptyProps): JSX.Element {
+export default function HomepageEmpty({favoriteOffers}: HomepageEmptyProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

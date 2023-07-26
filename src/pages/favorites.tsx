@@ -5,11 +5,10 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 
 type FavoritesProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function Favorites({offers}: FavoritesProps): JSX.Element {
-  const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
+export default function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
   const cities: Set<string> = new Set (favoriteOffers.map((element) => element.city.name));
   const citiesArray: string[] = [];
   cities.forEach((element) => citiesArray.push(element));
@@ -19,7 +18,7 @@ export default function Favorites({offers}: FavoritesProps): JSX.Element {
       <Helmet>
         <title>Favorites</title>
       </Helmet>
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

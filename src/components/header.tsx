@@ -5,11 +5,11 @@ import { AppRoute } from '../const';
 import { useLocation } from 'react-router-dom';
 
 type HeaderProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
   isNavigationOn: string;
 }
 
-export default function Header({offers, isNavigationOn}: HeaderProps): JSX.Element {
+export default function Header({favoriteOffers, isNavigationOn}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -25,7 +25,7 @@ export default function Header({offers, isNavigationOn}: HeaderProps): JSX.Eleme
               />
             </Link>
           </div>
-          {isNavigationOn ? <HeaderNavigation offers={offers} /> : null}
+          {isNavigationOn ? <HeaderNavigation favoriteOffers={favoriteOffers} /> : null}
         </div>
       </div>
     </header>

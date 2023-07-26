@@ -3,13 +3,13 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 
 type FavoritesEmptyProps = {
-  offers: Offers;
+  favoriteOffers: Offers;
 }
 
-export default function FavoritesEmpty({offers}: FavoritesEmptyProps): JSX.Element {
+export default function FavoritesEmpty({favoriteOffers}: FavoritesEmptyProps): JSX.Element {
   return (
     <div className="page page--favorites-empty">
-      <Header offers={offers} isNavigationOn='true'/>
+      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
       <main className="page__main page__main--favorites page__main--favorites-empty">
         <div className="page__favorites-container container">
           <section className="favorites favorites--empty">
