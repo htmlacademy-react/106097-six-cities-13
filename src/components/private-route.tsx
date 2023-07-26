@@ -1,9 +1,9 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AuthorizationStatus } from '../const';
 
 type PrivateRouteProps = {
-  restrictedFor: AuthorizationStatus,
-  redirectTo: AppRoute,
+  restrictedFor: string;
+  redirectTo: string;
   children: JSX.Element;
 }
 
