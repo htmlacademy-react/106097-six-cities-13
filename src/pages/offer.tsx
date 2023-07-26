@@ -12,7 +12,7 @@ type OfferProps = {
   favoriteOffers: Offers;
 };
 
-export default function OfferComponent({offers, favoriteOffers}: OfferProps): JSX.Element {
+export default function OfferComponent({offers, favoriteOffers}: OfferProps) {
   const { id: offerId } = useParams();
   const offer: Offer = offers.filter((item) => item.id === offerId)[0];
   if (!offer) {

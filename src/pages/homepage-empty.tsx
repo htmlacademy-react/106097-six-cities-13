@@ -5,7 +5,7 @@ type HomepageEmptyProps = {
   favoriteOffers: Offers;
 }
 
-export default function HomepageEmpty({favoriteOffers}: HomepageEmptyProps): JSX.Element {
+export default function HomepageEmpty({favoriteOffers}: HomepageEmptyProps) {
   return (
     <div className="page page--gray page--main">
       <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>

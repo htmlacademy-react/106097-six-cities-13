@@ -6,7 +6,7 @@ type LoginProps = {
   favoriteOffers: Offers;
 }
 
-export default function Login({favoriteOffers}: LoginProps): JSX.Element {
+export default function Login({favoriteOffers}: LoginProps) {
   return (
     <div className="page page--gray page--login">
       <Helmet>

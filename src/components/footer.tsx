@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute } from '../const';
 
-export default function Footer(): JSX.Element {
+export default function Footer() {
   return (
     <footer className="footer">
       <Link className="footer__logo-link" to={useLocation().pathname === AppRoute.Root ? '#' : AppRoute.Root}>

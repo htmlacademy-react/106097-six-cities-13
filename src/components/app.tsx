@@ -13,7 +13,7 @@ type AppProps = {
     offers: Offers;
 }
 
-export default function App({offers}: AppProps): JSX.Element {
+export default function App({offers}: AppProps) {
   const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
 
   return (

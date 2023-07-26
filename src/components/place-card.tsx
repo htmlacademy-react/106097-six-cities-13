@@ -7,7 +7,7 @@ type PlaceCardProps = {
   offer: Offer;
 };
 
-export default function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+export default function PlaceCard({offer}: PlaceCardProps) {
   const [, setActiveCard] = useState('');
 
   return (

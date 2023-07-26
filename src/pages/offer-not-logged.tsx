@@ -5,7 +5,7 @@ type OfferNotLoggedProps = {
   favoriteOffers: Offers;
 }
 
-export default function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps): JSX.Element {
+export default function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps) {
   return (
     <div className="page">
       <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>

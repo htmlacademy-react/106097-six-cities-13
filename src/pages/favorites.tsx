@@ -8,7 +8,7 @@ type FavoritesProps = {
   favoriteOffers: Offers;
 }
 
-export default function Favorites({favoriteOffers}: FavoritesProps): JSX.Element {
+export default function Favorites({favoriteOffers}: FavoritesProps) {
   const cities: Set<string> = new Set (favoriteOffers.map((element) => element.city.name));
   const citiesArray: string[] = [];
   cities.forEach((element) => citiesArray.push(element));

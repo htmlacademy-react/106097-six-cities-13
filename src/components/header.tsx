@@ -9,7 +9,7 @@ type HeaderProps = {
   isNavigationOn: string;
 }
 
-export default function Header({favoriteOffers, isNavigationOn}: HeaderProps): JSX.Element {
+export default function Header({favoriteOffers, isNavigationOn}: HeaderProps) {
   return (
     <header className="header">
       <div className="container">

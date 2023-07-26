@@ -4,7 +4,7 @@ type HeaderNavigationProps = {
   favoriteOffers: Offers;
 }
 
-export default function HeaderNavigation({favoriteOffers}: HeaderNavigationProps): JSX.Element {
+export default function HeaderNavigation({favoriteOffers}: HeaderNavigationProps) {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

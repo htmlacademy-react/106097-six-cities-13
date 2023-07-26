@@ -11,7 +11,7 @@ export default function PrivateRoute({
   restrictedFor,
   redirectTo,
   children
-}: PrivateRouteProps): JSX.Element {
+}: PrivateRouteProps) {
   const authorizationStatus = AuthorizationStatus.NoAuth;
 
   return restrictedFor === authorizationStatus ? (

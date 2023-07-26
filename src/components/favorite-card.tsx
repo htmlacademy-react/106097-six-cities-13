@@ -6,7 +6,7 @@ type FavoriteCardProps = {
   offer: Offer;
 }
 
-export default function FavoriteCard({offer}: FavoriteCardProps): JSX.Element {
+export default function FavoriteCard({offer}: FavoriteCardProps) {
   return (
     <article className="favorites__card place-card">
       {offer.isPremium ? (

@@ -7,7 +7,7 @@ type NotFoundProps = {
   favoriteOffers: Offers;
 }
 
-export default function NotFound({favoriteOffers}: NotFoundProps): JSX.Element {
+export default function NotFound({favoriteOffers}: NotFoundProps) {
   return (
     <div className="page">
       <Helmet>

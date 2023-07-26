@@ -8,7 +8,7 @@ type HomepageProps = {
   favoriteOffers: Offers;
 }
 
-export default function Homepage({offers, favoriteOffers}: HomepageProps): JSX.Element {
+export default function Homepage({offers, favoriteOffers}: HomepageProps) {
   return (
     <div className="page page--gray page--main">
       <Helmet>
