@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Offer, Offers } from '../types/offer';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { AppRoute } from '../const';
+import { AppRoute, MAX_RATING } from '../const';
 import { capitalizeFirstLetter } from '../utils';
 import { Header } from '../components/header';
 import { CommentForm } from '../components/comment-form';
@@ -61,7 +61,7 @@ export function OfferComponent({offers, favoriteOffers}: OfferProps) {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${offer.rating / 5 * 100}%` }} />
+                  <span style={{ width: `${offer.rating / MAX_RATING * 100}%` }} />
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{offer.rating}</span>

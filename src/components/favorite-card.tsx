@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../const';
+import { AppRoute, MAX_RATING } from '../const';
 
 type FavoriteCardProps = {
   id: string;
@@ -64,7 +64,7 @@ export function FavoriteCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating / 5 * 100}%` }} />
+            <span style={{ width: `${rating / MAX_RATING * 100}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
