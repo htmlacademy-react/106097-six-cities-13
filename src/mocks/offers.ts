@@ -7,14 +7,14 @@ export const offers = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.3909553943508,
+        'longitude': 4.85309666406198,
         'zoom': 8
       }
     },
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 8
     },
     'isFavorite': false,
@@ -41,16 +41,16 @@ export const offers = [
     'type': 'apartment',
     'price': 20,
     'city': {
-      'name': 'Berlin',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 45,
-        'longitude': 3,
+        'latitude': 52.3609553943508,
+        'longitude': 4.85309666406198,
         'zoom': 7
       }
     },
     'location': {
-      'latitude': 45,
-      'longitude': 3,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 7
     },
     'isFavorite': false,
@@ -77,16 +77,16 @@ export const offers = [
     'type': 'apartment',
     'price': 40,
     'city': {
-      'name': 'New York',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 47,
-        'longitude': 4,
+        'latitude': 52.3909553943508,
+        'longitude': 4.929309666406198,
         'zoom': 8
       }
     },
     'location': {
-      'latitude': 47,
-      'longitude': 4,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 8
     },
     'isFavorite': false,
@@ -113,16 +113,16 @@ export const offers = [
     'type': 'private room',
     'price': 10,
     'city': {
-      'name': 'Moscow',
+      'name': 'Amsterdam',
       'location': {
-        'latitude': 49,
-        'longitude': 5,
+        'latitude': 52.3809553943508,
+        'longitude': 4.939309666406198,
         'zoom': 8
       }
     },
     'location': {
-      'latitude': 49,
-      'longitude': 5,
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
       'zoom': 8
     },
     'isFavorite': true,
