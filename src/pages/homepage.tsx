@@ -3,6 +3,7 @@ import { Offers } from '../types/offer';
 import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
 import { Map } from '../components/map';
+import { CitiesList } from '../components/cities-list';
 
 type HomepageProps = {
   offers: Offers;
@@ -21,15 +22,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations constainer">
-            <ul className="locations__list tabs__list">
-              {cities.map((city) => (
-                <li className="locations__item" key={city}>
-                  <a className="locations__item-link tabs__item tabs__item--active" href="#">
-                    <span>{city}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <CitiesList cities={cities}/>
           </section>
         </div>
         <div className="cities">
@@ -66,7 +59,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={'Amsterdam'} />
+              {/* <Map city={'Amsterdam'} /> */}
             </div>
           </div>
         </div>

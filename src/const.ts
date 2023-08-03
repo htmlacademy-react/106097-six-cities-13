@@ -1,6 +1,4 @@
-export const Setting = {
-  PlacesCount: 10,
-};
+export const DEFAULT_ACTIVE_CITY = 'Amsterdam';
 
 export const AppRoute = {
   Root: '/',
