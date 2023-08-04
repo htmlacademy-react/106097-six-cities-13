@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
 import { Offers } from '../types/offer';
-import { FavoriteCard } from '../components/favorite-card';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
+import { PlaceCard } from '../components/place-card';
+import { cardTypesClasses } from '../const';
 
 type FavoritesProps = {
   favoriteOffers: Offers;
@@ -35,7 +36,7 @@ export function Favorites({favoriteOffers}: FavoritesProps) {
                   </div>
                   <div className="favorites__places">
                     {favoriteOffers.filter((offer) => offer.city.name === city).map((element) => (
-                      <FavoriteCard
+                      <PlaceCard
                         key={element.id}
                         id={element.id}
                         isPremium={element.isPremium}
@@ -45,6 +46,7 @@ export function Favorites({favoriteOffers}: FavoritesProps) {
                         rating={element.rating}
                         title={element.title}
                         type={element.type}
+                        cardType={cardTypesClasses.Favorites}
                       />))}
                   </div>
                 </li>

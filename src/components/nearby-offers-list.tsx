@@ -1,5 +1,6 @@
 import { NearbyOffers } from '../types/offer';
-import { NearbyOffer } from './nearby-offer';
+import { cardTypesClasses } from '../const';
+import { PlaceCard } from './place-card';
 
 type NearbyOffersListProps = {
   offers: NearbyOffers;
@@ -9,13 +10,17 @@ export function NearbyOffersList({offers}: NearbyOffersListProps) {
   return (
     <div className="near-places__list places__list">
       {offers.map((offer) => (
-        <NearbyOffer
+        <PlaceCard
           key={offer.id}
-          image={offer.previewImage}
+          id={offer.id}
+          images={[offer.previewImage]}
           price={offer.price}
+          isFavorite={offer.isFavorite}
+          rating={offer.rating}
           title={offer.title}
           type={offer.type}
-          rating={offer.rating}
+          cardType={cardTypesClasses.Cities}
+          isPremium={offer.isPremium}
         />
       ))}
     </div>
