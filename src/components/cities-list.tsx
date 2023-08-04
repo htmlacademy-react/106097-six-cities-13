@@ -1,12 +1,9 @@
-import { useState } from 'react';
-import { DEFAULT_ACTIVE_CITY } from '../const';
-
 type CitiesListProps = {
   cities: string[];
+  activeCity: string;
 }
 
-export function CitiesList({cities}: CitiesListProps) {
-  const [activeCity, setActiveCity] = useState(DEFAULT_ACTIVE_CITY);
+export function CitiesList({cities, activeCity}: CitiesListProps) {
 
   return (
     <ul className="locations__list tabs__list">

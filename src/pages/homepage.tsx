@@ -1,9 +1,11 @@
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
+import { Offer, Offers } from '../types/offer';
 import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
 import { Map } from '../components/map';
 import { CitiesList } from '../components/cities-list';
+import { useState } from 'react';
+import { DEFAULT_ACTIVE_CITY, DEFAULT_CITY } from '../const';
 
 type HomepageProps = {
   offers: Offers;
@@ -12,6 +14,15 @@ type HomepageProps = {
 }
 
 export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
+  const [activeCity, setActiveCity] = useState(DEFAULT_ACTIVE_CITY);
+  const cityObject = offers.find((offer) => offer.city.name === activeCity);
+  let city = cityObject?.city;
+  if (city === undefined) {
+    city = DEFAULT_CITY;
+  }
+
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -22,7 +33,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations constainer">
-            <CitiesList cities={cities}/>
+            <CitiesList cities={cities} activeCity={activeCity}/>
           </section>
         </div>
         <div className="cities">
@@ -59,7 +70,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              {/* <Map city={'Amsterdam'} /> */}
+              <Map city={city} points={offers} selectedPoint={selectedOffer} />
             </div>
           </div>
         </div>

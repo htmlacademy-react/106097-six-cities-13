@@ -8,14 +8,14 @@ export const offers = [
       'name': 'Amsterdam',
       'location': {
         'latitude': 52.3909553943508,
-        'longitude': 4.85309666406198,
-        'zoom': 8
+        'longitude': 4.89309666406198,
+        'zoom': 12,
       }
     },
     'location': {
       'latitude': 52.3909553943508,
       'longitude': 4.85309666406198,
-      'zoom': 8
+      'zoom': 8,
     },
     'isFavorite': false,
     'isPremium': false,
@@ -33,7 +33,7 @@ export const offers = [
     'images': [
       'https://url-to-image/image.png'
     ],
-    'maxAdults': 4
+    'maxAdults': 4,
   },
   {
     'id': '6af6f711',
@@ -43,15 +43,15 @@ export const offers = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.3609553943508,
+        'latitude': 52.3909553943508,
         'longitude': 4.85309666406198,
-        'zoom': 7
+        'zoom': 12,
       }
     },
     'location': {
       'latitude': 52.3609553943508,
       'longitude': 4.85309666406198,
-      'zoom': 7
+      'zoom': 7,
     },
     'isFavorite': false,
     'isPremium': false,
@@ -69,7 +69,7 @@ export const offers = [
     'images': [
       'https://url-to-image/image.png'
     ],
-    'maxAdults': 2
+    'maxAdults': 2,
   },
   {
     'id': 'c28d-4121',
@@ -80,14 +80,14 @@ export const offers = [
       'name': 'Amsterdam',
       'location': {
         'latitude': 52.3909553943508,
-        'longitude': 4.929309666406198,
-        'zoom': 8
+        'longitude': 4.85309666406198,
+        'zoom': 12,
       }
     },
     'location': {
       'latitude': 52.3909553943508,
       'longitude': 4.929309666406198,
-      'zoom': 8
+      'zoom': 8,
     },
     'isFavorite': false,
     'isPremium': false,
@@ -105,7 +105,7 @@ export const offers = [
     'images': [
       'https://url-to-image/image.png'
     ],
-    'maxAdults': 3
+    'maxAdults': 3,
   },
   {
     'id': '1',
@@ -115,15 +115,15 @@ export const offers = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.3809553943508,
-        'longitude': 4.939309666406198,
-        'zoom': 8
+        'latitude': 52.3909553943508,
+        'longitude': 4.85309666406198,
+        'zoom': 12,
       }
     },
     'location': {
       'latitude': 52.3809553943508,
       'longitude': 4.939309666406198,
-      'zoom': 8
+      'zoom': 8,
     },
     'isFavorite': true,
     'isPremium': true,
@@ -141,6 +141,6 @@ export const offers = [
     'images': [
       'https://url-to-image/image.png'
     ],
-    'maxAdults': 4
+    'maxAdults': 4,
   }
 ];
