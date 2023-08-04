@@ -8,6 +8,7 @@ import { Header } from '../components/header';
 import { CommentForm } from '../components/comment-form';
 import { ReviewsList } from '../components/reviews-list';
 import { reviews } from '../mocks/reviews';
+import { Map } from '../components/map';
 
 type OfferProps = {
   offers: Offers;
@@ -20,6 +21,8 @@ export function OfferComponent({offers, favoriteOffers}: OfferProps) {
   if (!offer) {
     return <Navigate to={AppRoute.NotFound} replace />;
   }
+
+  const nearbyOffers: Offers = offers.filter((element) => element.id !== offer.id);
 
   return (
     <div className="page">
@@ -121,7 +124,9 @@ export function OfferComponent({offers, favoriteOffers}: OfferProps) {
               </section>
             </div>
           </div>
-          <section className="offer__map map" />
+          <section className="offer__map map">
+            <Map city={offer.city} points={nearbyOffers} selectedPoint={offer} mapHeight={579}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">

@@ -70,7 +70,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} selectedPoint={selectedOffer} />
+              <Map city={city} points={offers} selectedPoint={selectedOffer} mapHeight={500}/>
             </div>
           </div>
         </div>
