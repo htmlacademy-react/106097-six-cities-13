@@ -30,3 +30,8 @@ export const cardTypesClasses = {
   Nearby: 'near-places',
   Favorites: 'favorites',
 };
+
+export const mapClasses = {
+  homepage: 'cities',
+  offer: 'offer',
+};

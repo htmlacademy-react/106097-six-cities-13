@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { NearbyOffers, Offer, Offers } from '../types/offer';
 import { useParams } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
-import { AppRoute, MAX_RATING } from '../const';
+import { AppRoute, MAX_RATING, mapClasses } from '../const';
 import { capitalizeFirstLetter } from '../utils';
 import { Header } from '../components/header';
 import { CommentForm } from '../components/comment-form';
@@ -125,7 +125,7 @@ export function OfferComponent({offers, favoriteOffers, nearbyOffers}: OfferProp
             </div>
           </div>
           <section className="offer__map map">
-            <Map city={offer.city} points={nearbyOffers} selectedPoint={offer} mapHeight={579}/>
+            <Map city={offer.city} points={nearbyOffers} selectedPoint={offer} mapHeight={579} block={mapClasses.offer}/>
           </section>
         </section>
         <div className="container">

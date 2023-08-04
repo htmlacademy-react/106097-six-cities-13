@@ -12,9 +12,10 @@ type MapProps = {
   points: Offers | NearbyOffers;
   selectedPoint: Offer | null;
   mapHeight: number;
+  block: string;
 }
 
-export function Map({city, points, selectedPoint, mapHeight}: MapProps) {
+export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
 
@@ -46,6 +47,6 @@ export function Map({city, points, selectedPoint, mapHeight}: MapProps) {
   }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon]);
 
   return (
-    <section className="cities__map map" style={{height: `${mapHeight}px` }} ref={mapRef} />
+    <section className={`${block}__map map`} style={{height: `${mapHeight}px` }} ref={mapRef} />
   );
 }
