@@ -1,14 +1,28 @@
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
+import { Offer, Offers } from '../types/offer';
 import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
+import { Map } from '../components/map';
+import { CitiesList } from '../components/cities-list';
+import { useState } from 'react';
+import { DEFAULT_ACTIVE_CITY, DEFAULT_CITY } from '../const';
 
 type HomepageProps = {
   offers: Offers;
   favoriteOffers: Offers;
+  cities: string[];
 }
 
-export function Homepage({offers, favoriteOffers}: HomepageProps) {
+export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
+  const [activeCity, setActiveCity] = useState(DEFAULT_ACTIVE_CITY);
+  const cityObject = offers.find((offer) => offer.city.name === activeCity);
+  let city = cityObject?.city;
+  if (city === undefined) {
+    city = DEFAULT_CITY;
+  }
+
+  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
@@ -19,38 +33,7 @@ export function Homepage({offers, favoriteOffers}: HomepageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations constainer">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities={cities} activeCity={activeCity}/>
           </section>
         </div>
         <div className="cities">
@@ -87,7 +70,7 @@ export function Homepage({offers, favoriteOffers}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map" />
+              <Map city={city} points={offers} selectedPoint={selectedOffer} />
             </div>
           </div>
         </div>

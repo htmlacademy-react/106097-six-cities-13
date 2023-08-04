@@ -15,13 +15,16 @@ type AppProps = {
 
 export function App({offers}: AppProps) {
   const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
+  const cities: Set<string> = new Set();
+  offers.map((offer) => cities.add(offer.city.name));
+  const citiesArray = Array.from(cities);
 
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root}>
-            <Route index element={<Homepage offers={offers} favoriteOffers={favoriteOffers}/>} />
+            <Route index element={<Homepage offers={offers} favoriteOffers={favoriteOffers} cities={citiesArray} />} />
             <Route
               path={AppRoute.Login}
               element={
