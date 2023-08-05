@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING } from '../const';
+import { cardTypesClasses } from '../const';
 
 type PlaceCardProps = {
   id: string;
@@ -10,6 +11,8 @@ type PlaceCardProps = {
   rating: number;
   title: string;
   type: string;
+  cardType: string;
+  isPremium: boolean;
 };
 
 export function PlaceCard({
@@ -19,13 +22,20 @@ export function PlaceCard({
   isFavorite,
   rating,
   title,
-  type
+  type,
+  cardType,
+  isPremium,
 }: PlaceCardProps) {
   const [, setActiveCard] = useState('');
 
   return (
-    <article className="cities__card place-card" onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
+      {isPremium ? (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      ) : null}
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
@@ -36,7 +46,7 @@ export function PlaceCard({
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${cardType === cardTypesClasses.Favorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{price}</b>

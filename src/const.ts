@@ -24,3 +24,14 @@ export const AuthorizationStatus = {
 };
 
 export const MAX_RATING = 5;
+
+export const cardTypesClasses = {
+  Cities: 'cities',
+  Nearby: 'near-places',
+  Favorites: 'favorites',
+};
+
+export const mapClasses = {
+  homepage: 'cities',
+  offer: 'offer',
+};

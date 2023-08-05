@@ -8,6 +8,7 @@ import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { Offers } from '../types/offer';
 import { OfferComponent } from '../pages/offer';
+import { nearbyOffers } from '../mocks/nearby-offers';
 
 type AppProps = {
     offers: Offers;
@@ -18,6 +19,7 @@ export function App({offers}: AppProps) {
   const cities: Set<string> = new Set();
   offers.map((offer) => cities.add(offer.city.name));
   const citiesArray = Array.from(cities);
+  const offersNearby = nearbyOffers;
 
   return (
     <HelmetProvider>
@@ -47,7 +49,7 @@ export function App({offers}: AppProps) {
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} favoriteOffers={favoriteOffers}/>} />
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} favoriteOffers={favoriteOffers} nearbyOffers={offersNearby}/>} />
             <Route path={AppRoute.NotFound} element={<NotFound favoriteOffers={favoriteOffers} />} />
             <Route path="*" element={<NotFound favoriteOffers={favoriteOffers} />} />
           </Route>

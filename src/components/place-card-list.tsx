@@ -1,5 +1,6 @@
 import { PlaceCard } from './place-card';
 import { Offers } from '../types/offer';
+import { cardTypesClasses } from '../const';
 
 type PlaceCardListProps = {
   offers: Offers;
@@ -18,6 +19,8 @@ export function PlaceCardList({offers}: PlaceCardListProps) {
           rating={element.rating}
           title={element.title}
           type={element.type}
+          cardType={cardTypesClasses.Cities}
+          isPremium={element.isPremium}
         />))}
     </div>
   );

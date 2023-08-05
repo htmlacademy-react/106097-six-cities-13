@@ -2,18 +2,20 @@ import { useEffect, useRef } from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, City, Offer } from '../types/offer';
+import { Offers, City, Offer, NearbyOffers } from '../types/offer';
 
 const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
 
 type MapProps = {
   city: City;
-  points: Offers;
+  points: Offers | NearbyOffers;
   selectedPoint: Offer | null;
+  mapHeight: number;
+  block: string;
 }
 
-export function Map({city, points, selectedPoint}: MapProps) {
+export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
 
@@ -45,8 +47,6 @@ export function Map({city, points, selectedPoint}: MapProps) {
   }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon]);
 
   return (
-    <section className="cities__map map" style={{height: '500px'}} ref={mapRef} >
-
-    </section>
+    <section className={`${block}__map map`} style={{height: `${mapHeight}px` }} ref={mapRef} />
   );
 }

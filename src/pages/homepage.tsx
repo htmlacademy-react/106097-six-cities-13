@@ -5,7 +5,7 @@ import { Header } from '../components/header';
 import { Map } from '../components/map';
 import { CitiesList } from '../components/cities-list';
 import { useState } from 'react';
-import { DEFAULT_ACTIVE_CITY, DEFAULT_CITY } from '../const';
+import { DEFAULT_ACTIVE_CITY, DEFAULT_CITY, mapClasses } from '../const';
 
 type HomepageProps = {
   offers: Offers;
@@ -70,7 +70,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} selectedPoint={selectedOffer} />
+              <Map city={city} points={offers} selectedPoint={selectedOffer} mapHeight={500} block={mapClasses.homepage}/>
             </div>
           </div>
         </div>
