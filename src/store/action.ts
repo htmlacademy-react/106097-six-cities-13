@@ -6,9 +6,5 @@ export const Action = {
   GET_OFFERS: 'getOffers',
 };
 
-export const changeCity = createAction(Action.CHANGE_CITY, (city: string) => ({
-  payload: city,
-}));
-export const getOffers = createAction(Action.GET_OFFERS, (offers: Offers) => ({
-  payload: offers,
-}));
+export const changeCity = createAction<{city: string}>(Action.CHANGE_CITY);
+export const getOffers = createAction<{offers: Offers}>(Action.GET_OFFERS);
