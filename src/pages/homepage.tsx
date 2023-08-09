@@ -10,10 +10,9 @@ import { DEFAULT_ACTIVE_CITY, DEFAULT_CITY, mapClasses } from '../const';
 type HomepageProps = {
   offers: Offers;
   favoriteOffers: Offers;
-  cities: string[];
 }
 
-export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
+export function Homepage({offers, favoriteOffers}: HomepageProps) {
   const [activeCity, setActiveCity] = useState(DEFAULT_ACTIVE_CITY);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   let city = cityObject?.city;
@@ -33,7 +32,7 @@ export function Homepage({offers, favoriteOffers, cities}: HomepageProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations constainer">
-            <CitiesList cities={cities} activeCity={activeCity}/>
+            <CitiesList activeCity={activeCity}/>
           </section>
         </div>
         <div className="cities">

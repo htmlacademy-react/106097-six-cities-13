@@ -9,6 +9,8 @@ export const DEFAULT_CITY = {
   }
 };
 
+export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
 export const AppRoute = {
   Root: '/',
   Login: '/login',
