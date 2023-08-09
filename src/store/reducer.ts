@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { changeCity, getOffers } from './action';
-import { Offers } from './types/offer';
+import { Offers } from '../types/offer';
 
 type stateType = {
   city: string;
