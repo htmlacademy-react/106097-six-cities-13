@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING } from '../const';
 import { cardTypesClasses } from '../const';
 import { useAppDispatch } from '../hooks';
-import { addToFavorites } from '../store/action';
-import { Offer } from '../types/offer';
+import { addToFavorites, selectOffer } from '../store/action';
 
 type PlaceCardProps = {
   id: string;
@@ -29,9 +27,8 @@ export function PlaceCard({
   isPremium,
   cardType,
 }: PlaceCardProps) {
-  const [, setActiveCard] = useState('');
-
   const dispatch = useAppDispatch();
+
   const handeAddToFavorites = (offerId: string) => {
     const favoriteOfferId = offerId;
     return function () {
@@ -39,8 +36,12 @@ export function PlaceCard({
     };
   };
 
+  const handleMouseEvents = (activeOfferId: string) => {
+    dispatch(selectOffer(activeOfferId));
+  };
+
   return (
-    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
+    <article className={`${cardType}__card place-card`} onMouseOver={() => handleMouseEvents(id)} onMouseOut={() => handleMouseEvents('')}>
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>

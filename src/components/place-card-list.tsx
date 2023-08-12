@@ -1,6 +1,7 @@
 import { PlaceCard } from './place-card';
 import { Offers } from '../types/offer';
 import { cardTypesClasses } from '../const';
+import { useAppSelector } from '../hooks';
 
 type PlaceCardListProps = {
   offers: Offers;

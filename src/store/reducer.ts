@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, addToFavorites } from './action';
+import { changeCity, addToFavorites, selectOffer } from './action';
 import { Offer, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY } from '../const';
 import { offers } from '../mocks/offers';
@@ -7,11 +7,13 @@ import { offers } from '../mocks/offers';
 type stateType = {
   city: string;
   offers: Offers;
+  activeOffer: string;
 }
 
 const initialState = {
   city: DEFAULT_ACTIVE_CITY,
   offers: offers,
+  activeOffer: '',
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -27,5 +29,8 @@ export const reducer = createReducer(initialState, (builder) => {
       } else {
         offer.isFavorite = false;
       }
+    })
+    .addCase(selectOffer, (state: stateType, action) => {
+      state.activeOffer = action.payload;
     });
 });
