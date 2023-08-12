@@ -1,10 +1,9 @@
 import { Helmet } from 'react-helmet-async';
-import { Offer, Offers } from '../types/offer';
+import { Offers } from '../types/offer';
 import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
 import { Map } from '../components/map';
 import { CitiesList } from '../components/cities-list';
-import { useState } from 'react';
 import { DEFAULT_CITY, mapClasses } from '../const';
 import { useAppSelector } from '../hooks';
 
@@ -19,8 +18,6 @@ export function Homepage({offers}: HomepageProps) {
   if (city === undefined) {
     city = DEFAULT_CITY;
   }
-
-  const [selectedOffer, setSelectedOffer] = useState<Offer | null>(null);
 
   return (
     <div className="page page--gray page--main">
@@ -69,7 +66,7 @@ export function Homepage({offers}: HomepageProps) {
               <PlaceCardList offers={offers}/>
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} selectedPoint={selectedOffer} mapHeight={500} block={mapClasses.homepage}/>
+              <Map city={city} points={offers} mapHeight={500} block={mapClasses.homepage}/>
             </div>
           </div>
         </div>

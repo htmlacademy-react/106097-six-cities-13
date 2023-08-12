@@ -24,9 +24,9 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addToFavorites, (state: stateType, action) => {
       const offer: Offer | undefined = state.offers.find((element) => element.id === action.payload);
-      if (!offer?.isFavorite) {
+      if (!offer?.isFavorite && offer?.isFavorite !== undefined) {
         offer.isFavorite = true;
-      } else {
+      } else if (offer?.isFavorite !== undefined) {
         offer.isFavorite = false;
       }
     })
