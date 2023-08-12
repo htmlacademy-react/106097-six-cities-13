@@ -21,7 +21,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = offers.filter((offer) => offer.city.name === action.payload);
     })
     .addCase(addToFavorites, (state: stateType, action) => {
-      const offer: Offer | undefined = state.offers.find((element) => element.id === action.payload.id);
+      const offer: Offer | undefined = state.offers.find((element) => element.id === action.payload);
       if (!offer?.isFavorite) {
         offer.isFavorite = true;
       } else {

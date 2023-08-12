@@ -12,8 +12,15 @@ export function PlaceCardList({offers}: PlaceCardListProps) {
       {offers.map((element) => (
         <PlaceCard
           key={element.id}
-          offer={element}
+          id={element.id}
+          images={element.images}
+          price={element.price}
+          isFavorite={element.isFavorite}
+          rating={element.rating}
+          title={element.title}
+          type={element.type}
           cardType={cardTypesClasses.Cities}
+          isPremium={element.isPremium}
         />))}
     </div>
   );

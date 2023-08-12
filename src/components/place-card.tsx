@@ -7,36 +7,50 @@ import { addToFavorites } from '../store/action';
 import { Offer } from '../types/offer';
 
 type PlaceCardProps = {
-  offer: Offer;
+  id: string;
+  images: string[];
+  price: number;
+  isFavorite: boolean;
+  rating: number;
+  title: string;
+  type: string;
+  isPremium: boolean;
   cardType: string;
 };
 
 export function PlaceCard({
-  offer,
+  id,
+  images,
+  price,
+  isFavorite,
+  rating,
+  title,
+  type,
+  isPremium,
   cardType,
 }: PlaceCardProps) {
   const [, setActiveCard] = useState('');
 
   const dispatch = useAppDispatch();
-  const handeAddToFavorites = (offerToAdd: Offer) => {
-    const favoriteOffer = offerToAdd;
+  const handeAddToFavorites = (offerId: string) => {
+    const favoriteOfferId = offerId;
     return function () {
-      dispatch(addToFavorites(favoriteOffer));
+      dispatch(addToFavorites(favoriteOfferId));
     };
   };
 
   return (
-    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(offer.id)} onMouseOut={() => setActiveCard('')}>
-      {offer.isPremium ? (
+    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
+      {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       ) : null}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}/${offer.id}`}>
+        <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
-            src={offer.images[0] ? offer.images[0] : '#'}
+            src={images[0] ? images[0] : '#'}
             width="260"
             height="200"
             alt="Place image"
@@ -46,13 +60,13 @@ export function PlaceCard({
       <div className={`${cardType === cardTypesClasses.Favorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{offer.price}</b>
+            <b className="place-card__price-value">€{price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
-            onClick={handeAddToFavorites(offer)}
+            onClick={handeAddToFavorites(id)}
           >
             <svg
               className="place-card__bookmark-icon"
@@ -66,14 +80,14 @@ export function PlaceCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${offer.rating / MAX_RATING * 100}%` }} />
+            <span style={{ width: `${rating / MAX_RATING * 100}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
+          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
