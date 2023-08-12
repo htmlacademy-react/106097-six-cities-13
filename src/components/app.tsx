@@ -9,12 +9,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Offers } from '../types/offer';
 import { OfferComponent } from '../pages/offer';
 import { nearbyOffers } from '../mocks/nearby-offers';
+import { useAppSelector } from '../hooks';
 
-type AppProps = {
-    offers: Offers;
-}
-
-export function App({offers}: AppProps) {
+export function App() {
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
   const offersNearby = nearbyOffers;
 
@@ -23,7 +21,7 @@ export function App({offers}: AppProps) {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root}>
-            <Route index element={<Homepage offers={offers} favoriteOffers={favoriteOffers} />} />
+            <Route index element={<Homepage offers={offers} />} />
             <Route
               path={AppRoute.Login}
               element={
