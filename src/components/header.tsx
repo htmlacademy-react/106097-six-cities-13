@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Offers } from '../types/offer';
 import { HeaderNavigation } from './header-navigation';
 import { AppRoute } from '../const';
 import { useLocation } from 'react-router-dom';
 
 type HeaderProps = {
-  favoriteOffers: Offers;
   isNavigationOn: string;
 }
 
-export function Header({favoriteOffers, isNavigationOn}: HeaderProps) {
+export function Header({isNavigationOn}: HeaderProps) {
   return (
     <header className="header">
       <div className="container">
@@ -25,7 +23,7 @@ export function Header({favoriteOffers, isNavigationOn}: HeaderProps) {
               />
             </Link>
           </div>
-          {isNavigationOn ? <HeaderNavigation favoriteOffers={favoriteOffers} /> : null}
+          {isNavigationOn ? <HeaderNavigation /> : null}
         </div>
       </div>
     </header>

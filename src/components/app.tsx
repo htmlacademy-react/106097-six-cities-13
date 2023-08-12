@@ -6,19 +6,12 @@ import { Login } from '../pages/login';
 import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { OfferComponent } from '../pages/offer';
 import { nearbyOffers } from '../mocks/nearby-offers';
+import { useAppSelector } from '../hooks';
 
-type AppProps = {
-    offers: Offers;
-}
-
-export function App({offers}: AppProps) {
-  const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
-  const cities: Set<string> = new Set();
-  offers.map((offer) => cities.add(offer.city.name));
-  const citiesArray = Array.from(cities);
+export function App() {
+  const offers = useAppSelector((state) => state.offers);
   const offersNearby = nearbyOffers;
 
   return (
@@ -26,7 +19,7 @@ export function App({offers}: AppProps) {
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Root}>
-            <Route index element={<Homepage offers={offers} favoriteOffers={favoriteOffers} cities={citiesArray} />} />
+            <Route index element={<Homepage offers={offers} />} />
             <Route
               path={AppRoute.Login}
               element={
@@ -34,7 +27,7 @@ export function App({offers}: AppProps) {
                   restrictedFor={AuthorizationStatus.Auth}
                   redirectTo={AppRoute.Root}
                 >
-                  <Login favoriteOffers={favoriteOffers} />
+                  <Login />
                 </PrivateRoute>
               }
             />
@@ -45,13 +38,13 @@ export function App({offers}: AppProps) {
                   restrictedFor={AuthorizationStatus.NoAuth}
                   redirectTo={AppRoute.Login}
                 >
-                  <Favorites favoriteOffers={favoriteOffers} />
+                  <Favorites />
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} favoriteOffers={favoriteOffers} nearbyOffers={offersNearby}/>} />
-            <Route path={AppRoute.NotFound} element={<NotFound favoriteOffers={favoriteOffers} />} />
-            <Route path="*" element={<NotFound favoriteOffers={favoriteOffers} />} />
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} />
+            <Route path={AppRoute.NotFound} element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

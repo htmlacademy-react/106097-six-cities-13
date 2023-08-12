@@ -1,18 +1,13 @@
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { Header } from '../components/header';
 
-type LoginProps = {
-  favoriteOffers: Offers;
-}
-
-export function Login({favoriteOffers}: LoginProps) {
+export function Login() {
   return (
     <div className="page page--gray page--login">
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='false'/>
+      <Header isNavigationOn='false'/>
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">

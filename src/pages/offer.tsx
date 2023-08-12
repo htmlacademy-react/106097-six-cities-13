@@ -13,11 +13,10 @@ import { NearbyOffersList } from '../components/nearby-offers-list';
 
 type OfferProps = {
   offers: Offers;
-  favoriteOffers: Offers;
   nearbyOffers: NearbyOffers;
 };
 
-export function OfferComponent({offers, favoriteOffers, nearbyOffers}: OfferProps) {
+export function OfferComponent({offers, nearbyOffers}: OfferProps) {
   const { id: offerId } = useParams();
   const offer: Offer = offers.filter((item) => item.id === offerId)[0];
   if (!offer) {
@@ -29,7 +28,7 @@ export function OfferComponent({offers, favoriteOffers, nearbyOffers}: OfferProp
       <Helmet>
         <title>Offer details</title>
       </Helmet>
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
+      <Header isNavigationOn='true'/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

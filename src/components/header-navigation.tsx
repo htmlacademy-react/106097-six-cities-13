@@ -1,10 +1,9 @@
 import { Offers } from '../types/offer';
+import { useAppSelector } from '../hooks';
 
-type HeaderNavigationProps = {
-  favoriteOffers: Offers;
-}
+export function HeaderNavigation() {
+  const offers: Offers = useAppSelector((state) => state.offers.filter((offer) => offer.isFavorite === true));
 
-export function HeaderNavigation({favoriteOffers}: HeaderNavigationProps) {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -17,7 +16,7 @@ export function HeaderNavigation({favoriteOffers}: HeaderNavigationProps) {
             <span className="header__user-name user__name">
               Oliver.conner@gmail.com
             </span>
-            <span className="header__favorite-count">{favoriteOffers.length}</span>
+            <span className="header__favorite-count">{offers.length}</span>
           </a>
         </li>
         <li className="header__nav-item">
