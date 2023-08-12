@@ -29,16 +29,9 @@ export function PlaceCard({
 }: PlaceCardProps) {
   const dispatch = useAppDispatch();
 
-  const handeAddToFavorites = (offerId: string) => {
-    const favoriteOfferId = offerId;
-    return function () {
-      dispatch(addToFavorites(favoriteOfferId));
-    };
-  };
+  const handeAddToFavorites = (offerId: string) => dispatch(addToFavorites(offerId));
 
-  const handleMouseEvents = (activeOfferId: string) => {
-    dispatch(selectOffer(activeOfferId));
-  };
+  const handleMouseEvents = (activeOfferId: string) => dispatch(selectOffer(activeOfferId));
 
   return (
     <article className={`${cardType}__card place-card`} onMouseOver={() => handleMouseEvents(id)} onMouseOut={() => handleMouseEvents('')}>
@@ -67,7 +60,7 @@ export function PlaceCard({
           <button
             className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
-            onClick={handeAddToFavorites(id)}
+            onClick={() => handeAddToFavorites(id)}
           >
             <svg
               className="place-card__bookmark-icon"
