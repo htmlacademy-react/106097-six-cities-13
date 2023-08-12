@@ -2,44 +2,41 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING } from '../const';
 import { cardTypesClasses } from '../const';
+import { useAppDispatch } from '../hooks';
+import { addToFavorites } from '../store/action';
+import { Offer } from '../types/offer';
 
 type PlaceCardProps = {
-  id: string;
-  images: string[];
-  price: number;
-  isFavorite: boolean;
-  rating: number;
-  title: string;
-  type: string;
+  offer: Offer;
   cardType: string;
-  isPremium: boolean;
 };
 
 export function PlaceCard({
-  id,
-  images,
-  price,
-  isFavorite,
-  rating,
-  title,
-  type,
+  offer,
   cardType,
-  isPremium,
 }: PlaceCardProps) {
   const [, setActiveCard] = useState('');
 
+  const dispatch = useAppDispatch();
+  const handeAddToFavorites = (offerToAdd: Offer) => {
+    const favoriteOffer = offerToAdd;
+    return function () {
+      dispatch(addToFavorites(favoriteOffer));
+    };
+  };
+
   return (
-    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(id)} onMouseOut={() => setActiveCard('')}>
-      {isPremium ? (
+    <article className={`${cardType}__card place-card`} onMouseOver={() => setActiveCard(offer.id)} onMouseOut={() => setActiveCard('')}>
+      {offer.isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       ) : null}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}/${id}`}>
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img
             className="place-card__image"
-            src={images[0] ? images[0] : '#'}
+            src={offer.images[0] ? offer.images[0] : '#'}
             width="260"
             height="200"
             alt="Place image"
@@ -49,12 +46,13 @@ export function PlaceCard({
       <div className={`${cardType === cardTypesClasses.Favorites ? 'favorites__card-info' : ''} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">€{price}</b>
+            <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
+            onClick={handeAddToFavorites(offer)}
           >
             <svg
               className="place-card__bookmark-icon"
@@ -68,14 +66,14 @@ export function PlaceCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating / MAX_RATING * 100}%` }} />
+            <span style={{ width: `${offer.rating / MAX_RATING * 100}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );
