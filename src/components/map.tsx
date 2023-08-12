@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import leaflet from 'leaflet';
+import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
 import { Offers, City, Offer, NearbyOffers } from '../types/offer';
@@ -33,6 +33,7 @@ export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
 
   useEffect(() => {
     if (map) {
+      const placeLayer = layerGroup().addTo(map);
       points.forEach((point) => {
         leaflet
           .marker({
@@ -41,8 +42,11 @@ export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
           }, {
             icon: selectedPoint?.id === point.id ? currentCustomIcon : defaultCustomIcon,
           })
-          .addTo(map);
+          .addTo(placeLayer);
       });
+      return () => {
+        map.removeLayer(placeLayer);
+      };
     }
   }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon]);
 
