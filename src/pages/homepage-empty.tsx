@@ -1,14 +1,9 @@
-import { Offers } from '../types/offer';
 import { Header } from '../components/header';
 
-type HomepageEmptyProps = {
-  favoriteOffers: Offers;
-}
-
-export function HomepageEmpty({favoriteOffers}: HomepageEmptyProps) {
+export function HomepageEmpty() {
   return (
     <div className="page page--gray page--main">
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
+      <Header isNavigationOn='true'/>
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

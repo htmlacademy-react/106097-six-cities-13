@@ -1,19 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { Header } from '../components/header';
 
-type NotFoundProps = {
-  favoriteOffers: Offers;
-}
-
-export function NotFound({favoriteOffers}: NotFoundProps) {
+export function NotFound() {
   return (
     <div className="page">
       <Helmet>
         <title>Page not found</title>
       </Helmet>
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='false'/>
+      <Header isNavigationOn='false'/>
       <main className="page__main page__main--login">
         <div className="container">
           <section>

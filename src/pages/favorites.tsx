@@ -1,15 +1,12 @@
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { PlaceCard } from '../components/place-card';
 import { cardTypesClasses } from '../const';
+import { useAppSelector } from '../hooks';
 
-type FavoritesProps = {
-  favoriteOffers: Offers;
-}
-
-export function Favorites({favoriteOffers}: FavoritesProps) {
+export function Favorites() {
+  const favoriteOffers = useAppSelector((state) => state.offers.filter((offer) => offer.isFavorite));
   const cities: Set<string> = new Set (favoriteOffers.map((element) => element.city.name));
   const citiesArray: string[] = [];
   cities.forEach((element) => citiesArray.push(element));
@@ -19,7 +16,7 @@ export function Favorites({favoriteOffers}: FavoritesProps) {
       <Helmet>
         <title>Favorites</title>
       </Helmet>
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
+      <Header isNavigationOn='true'/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

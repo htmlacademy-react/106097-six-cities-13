@@ -6,14 +6,12 @@ import { Login } from '../pages/login';
 import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { OfferComponent } from '../pages/offer';
 import { nearbyOffers } from '../mocks/nearby-offers';
 import { useAppSelector } from '../hooks';
 
 export function App() {
   const offers = useAppSelector((state) => state.offers);
-  const favoriteOffers: Offers = offers.filter((element) => element.isFavorite);
   const offersNearby = nearbyOffers;
 
   return (
@@ -29,7 +27,7 @@ export function App() {
                   restrictedFor={AuthorizationStatus.Auth}
                   redirectTo={AppRoute.Root}
                 >
-                  <Login favoriteOffers={favoriteOffers} />
+                  <Login />
                 </PrivateRoute>
               }
             />
@@ -40,13 +38,13 @@ export function App() {
                   restrictedFor={AuthorizationStatus.NoAuth}
                   redirectTo={AppRoute.Login}
                 >
-                  <Favorites favoriteOffers={favoriteOffers} />
+                  <Favorites />
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} favoriteOffers={favoriteOffers} nearbyOffers={offersNearby}/>} />
-            <Route path={AppRoute.NotFound} element={<NotFound favoriteOffers={favoriteOffers} />} />
-            <Route path="*" element={<NotFound favoriteOffers={favoriteOffers} />} />
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} />
+            <Route path={AppRoute.NotFound} element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

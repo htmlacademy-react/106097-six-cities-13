@@ -1,14 +1,9 @@
-import { Offers } from '../types/offer';
 import { Header } from '../components/header';
 
-type OfferNotLoggedProps = {
-  favoriteOffers: Offers;
-}
-
-export function OfferNotLogged({favoriteOffers}: OfferNotLoggedProps) {
+export function OfferNotLogged() {
   return (
     <div className="page">
-      <Header favoriteOffers={favoriteOffers} isNavigationOn='true'/>
+      <Header isNavigationOn='true'/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

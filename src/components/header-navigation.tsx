@@ -1,10 +1,8 @@
-import { Offers } from '../types/offer';
+import { useAppSelector } from '../hooks';
 
-type HeaderNavigationProps = {
-  favoriteOffers: Offers;
-}
+export function HeaderNavigation() {
+  const favoriteOffers = useAppSelector((state) => state.offers.filter((offer) => offer.isFavorite));
 
-export function HeaderNavigation({favoriteOffers}: HeaderNavigationProps) {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
