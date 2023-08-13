@@ -2,22 +2,24 @@ import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, City, Offer, NearbyOffers } from '../types/offer';
+import { Offers, City, NearbyOffers } from '../types/offer';
+import { useAppSelector } from '../hooks';
 
-const URL_MARKER_DEFAULT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
-const URL_MARKER_CURRENT = 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+const URL_MARKER_DEFAULT = '../../public/img/pin.svg';
+const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
 
 type MapProps = {
   city: City;
   points: Offers | NearbyOffers;
-  selectedPoint: Offer | null;
   mapHeight: number;
   block: string;
 }
 
-export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
+export function Map({city, points, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
+
+  const selectedPoint = useAppSelector((state) => state.activeOffer);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -40,7 +42,7 @@ export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
             lat: point.location.latitude,
             lng: point.location.longitude,
           }, {
-            icon: selectedPoint?.id === point.id ? currentCustomIcon : defaultCustomIcon,
+            icon: selectedPoint === point.id ? currentCustomIcon : defaultCustomIcon,
           })
           .addTo(placeLayer);
       });

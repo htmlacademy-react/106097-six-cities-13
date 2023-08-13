@@ -1,6 +1,9 @@
 import { Header } from '../components/header';
+import { useAppSelector } from '../hooks';
+import { CitiesList } from '../components/cities-list';
 
 export function HomepageEmpty() {
+  const activeCity = useAppSelector((state) => state.city);
   return (
     <div className="page page--gray page--main">
       <Header isNavigationOn='true'/>
@@ -8,41 +11,7 @@ export function HomepageEmpty() {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a
-                  className="locations__item-link tabs__item tabs__item--active"
-                  href="#"
-                >
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList activeCity={activeCity}/>
           </section>
         </div>
         <div className="cities">
@@ -52,7 +21,7 @@ export function HomepageEmpty() {
                 <b className="cities__status">No places to stay available</b>
                 <p className="cities__status-description">
                   We could not find any property available at the moment in
-                  Dusseldorf
+                  {activeCity}
                 </p>
               </div>
             </section>
