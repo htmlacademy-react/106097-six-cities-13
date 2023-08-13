@@ -11,7 +11,7 @@ type stateType = {
   sortType: string;
 }
 
-const initialState = {
+const initialState: stateType = {
   city: DEFAULT_ACTIVE_CITY,
   offers: offers,
   activeOffer: '',
