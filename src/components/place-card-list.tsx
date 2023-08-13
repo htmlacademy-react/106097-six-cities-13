@@ -1,12 +1,9 @@
 import { PlaceCard } from './place-card';
-import { Offers } from '../types/offer';
 import { cardTypesClasses } from '../const';
+import { useAppSelector } from '../hooks';
 
-type PlaceCardListProps = {
-  offers: Offers;
-}
-
-export function PlaceCardList({offers}: PlaceCardListProps) {
+export function PlaceCardList() {
+  const offers = useAppSelector((state) => state.offers);
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((element) => (
