@@ -9,9 +9,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
 import { nearbyOffers } from '../mocks/nearby-offers';
 import { useAppSelector } from '../hooks';
+import { selectors } from '../middleware/index';
 
 export function App() {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(selectors.offers);
   const offersNearby = nearbyOffers;
 
   return (

@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
 import { Offers, City, NearbyOffers } from '../types/offer';
 import { useAppSelector } from '../hooks';
+import { selectors } from '../middleware/index';
 
 const URL_MARKER_DEFAULT = '../../public/img/pin.svg';
 const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
@@ -19,7 +20,7 @@ export function Map({city, points, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
 
-  const selectedPoint = useAppSelector((state) => state.activeOffer);
+  const selectedPoint = useAppSelector(selectors.activeOffer);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,

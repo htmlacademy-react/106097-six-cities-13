@@ -7,13 +7,14 @@ import { CitiesList } from '../components/cities-list';
 import { DEFAULT_CITY, mapClasses } from '../const';
 import { useAppSelector } from '../hooks';
 import { Sort } from '../components/sort';
+import * as selectors from '../store/selectors';
 
 type HomepageProps = {
   offers: Offers;
 }
 
 export function Homepage({offers}: HomepageProps) {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(selectors.activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   let city = cityObject?.city;
   if (city === undefined) {

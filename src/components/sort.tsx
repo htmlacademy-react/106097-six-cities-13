@@ -1,10 +1,11 @@
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sort } from '../store/action';
+import { selectors } from '../middleware/index';
 
 const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 
 export function Sort() {
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(selectors.sortType);
 
   const dispatch = useAppDispatch();
   const handleSort = (sortName: string) => {
