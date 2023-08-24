@@ -6,7 +6,7 @@ import { addToFavorites, selectOffer } from '../store/action';
 
 type PlaceCardProps = {
   id: string;
-  images: string[];
+  image: string;
   price: number;
   isFavorite: boolean;
   rating: number;
@@ -18,7 +18,7 @@ type PlaceCardProps = {
 
 export function PlaceCard({
   id,
-  images,
+  image,
   price,
   isFavorite,
   rating,
@@ -44,7 +44,7 @@ export function PlaceCard({
         <Link to={`${AppRoute.Offer}/${id}`}>
           <img
             className="place-card__image"
-            src={images[0] ? images[0] : '#'}
+            src={image}
             width="260"
             height="200"
             alt="Place image"

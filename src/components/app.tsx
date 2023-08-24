@@ -12,7 +12,7 @@ import { selectors } from '../middleware/index';
 
 export function App() {
   const offers = useAppSelector(selectors.offers);
-  const offersNearby = nearbyOffers;
+  // const offersNearby = nearbyOffers;
 
   return (
     <HelmetProvider>
@@ -42,7 +42,7 @@ export function App() {
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} />
+            {/* <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} /> */}
             <Route path={AppRoute.NotFound} element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Route>

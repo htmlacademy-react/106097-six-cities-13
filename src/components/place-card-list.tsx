@@ -11,7 +11,7 @@ export function PlaceCardList() {
         <PlaceCard
           key={element.id}
           id={element.id}
-          images={element.images}
+          image={element.previewImage}
           price={element.price}
           isFavorite={element.isFavorite}
           rating={element.rating}

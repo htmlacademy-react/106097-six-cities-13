@@ -20,6 +20,19 @@ export type Offer = {
   maxAdults: number;
 };
 
+export type OfferPreview = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: City;
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+};
+
 export type City = {
   name: string;
   location: Location;
@@ -31,7 +44,7 @@ export type Location = {
   zoom: number;
 };
 
-export type Offers = Offer[];
+export type Offers = OfferPreview[];
 
 export type NearbyOffer = {
   id: string;
