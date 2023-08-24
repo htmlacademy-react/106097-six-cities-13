@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, addToFavorites, selectOffer, sort } from './action';
+import { changeCity, addToFavorites, selectOffer, sort, loadOffers } from './action';
 import { Offer, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE } from '../const';
 
@@ -12,7 +12,7 @@ type stateType = {
 
 const initialState: stateType = {
   city: DEFAULT_ACTIVE_CITY,
-  offers: offers,
+  offers: [],
   activeOffer: '',
   sortType: DEFAULT_SORT_TYPE,
 };
@@ -49,5 +49,8 @@ export const reducer = createReducer(initialState, (builder) => {
         default:
           state.offers = offers;
       }
+    })
+    .addCase(loadOffers, (state: stateType, action) => {
+      state.offers = action.payload;
     });
 });
