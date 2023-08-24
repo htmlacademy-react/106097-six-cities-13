@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, addToFavorites, selectOffer, sort, loadOffers } from './action';
+import { changeCity, addToFavorites, selectOffer, sort, loadOffers, setOffersDataLoadingStatus } from './action';
 import { Offer, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE } from '../const';
 
@@ -8,6 +8,7 @@ type stateType = {
   offers: Offers;
   activeOffer: string;
   sortType: string;
+  isOffersDataLoading: boolean;
 }
 
 const initialState: stateType = {
@@ -15,6 +16,7 @@ const initialState: stateType = {
   offers: [],
   activeOffer: '',
   sortType: DEFAULT_SORT_TYPE,
+  isOffersDataLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -52,5 +54,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadOffers, (state: stateType, action) => {
       state.offers = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state: stateType, action) => {
+      state.isOffersDataLoading = action.payload;
     });
 });

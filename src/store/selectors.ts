@@ -5,3 +5,4 @@ export const favoriteOffers = (state: State) => state.offers.filter((offer) => o
 export const activeOffer = (state: State) => state.activeOffer;
 export const sortType = (state: State) => state.sortType;
 export const activeCity = (state: State) => state.city;
+export const offersLoadingStatus = (state: State) => state.isOffersDataLoading;

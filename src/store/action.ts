@@ -12,3 +12,4 @@ export const addToFavorites = createAction<string>(Action.ADD_TO_FAVORITES);
 export const selectOffer = createAction<string>(Action.SELECT_OFFER);
 export const sort = createAction<string>('sort');
 export const loadOffers = createAction<Offers>('loadOffers');
+export const setOffersDataLoadingStatus = createAction<boolean>('setOffersDataLoadingStatus');
