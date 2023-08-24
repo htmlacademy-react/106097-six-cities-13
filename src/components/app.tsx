@@ -7,7 +7,6 @@ import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
-import { nearbyOffers } from '../mocks/nearby-offers';
 import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
 

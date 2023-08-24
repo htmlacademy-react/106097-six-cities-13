@@ -7,7 +7,6 @@ import { capitalizeFirstLetter } from '../utils';
 import { Header } from '../components/header';
 import { CommentForm } from '../components/comment-form';
 import { ReviewsList } from '../components/reviews-list';
-import { reviews } from '../mocks/reviews';
 import { Map } from '../components/map';
 import { NearbyOffersList } from '../components/nearby-offers-list';
 

@@ -2,7 +2,6 @@ import {createReducer} from '@reduxjs/toolkit';
 import { changeCity, addToFavorites, selectOffer, sort } from './action';
 import { Offer, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE } from '../const';
-import { offers } from '../mocks/offers';
 
 type stateType = {
   city: string;
