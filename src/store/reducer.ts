@@ -1,7 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, addToFavorites, selectOffer, sort, loadOffers, setOffersDataLoadingStatus } from './action';
-import { Offer, Offers } from '../types/offer';
-import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE } from '../const';
+import { changeCity, addToFavorites, selectOffer, sort, loadOffers, setOffersDataLoadingStatus, requireAuthorization } from './action';
+import { OfferPreview, Offers } from '../types/offer';
+import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE, AuthorizationStatus } from '../const';
+import { AuthorizationStatusType } from '../types/consts';
 
 type stateType = {
   city: string;
@@ -9,6 +10,7 @@ type stateType = {
   activeOffer: string;
   sortType: string;
   isOffersDataLoading: boolean;
+  authorizationStatus: AuthorizationStatusType;
 }
 
 const initialState: stateType = {
@@ -17,6 +19,7 @@ const initialState: stateType = {
   activeOffer: '',
   sortType: DEFAULT_SORT_TYPE,
   isOffersDataLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -26,7 +29,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.offers = offers.filter((offer) => offer.city.name === action.payload);
     })
     .addCase(addToFavorites, (state: stateType, action) => {
-      const offer: Offer | undefined = state.offers.find((element) => element.id === action.payload);
+      const offer: OfferPreview | undefined = state.offers.find((element) => element.id === action.payload);
       if (!offer?.isFavorite && offer?.isFavorite !== undefined) {
         offer.isFavorite = true;
       } else if (offer?.isFavorite !== undefined) {
@@ -57,5 +60,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOffersDataLoadingStatus, (state: stateType, action) => {
       state.isOffersDataLoading = action.payload;
+    })
+    .addCase(requireAuthorization, (state: stateType, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
