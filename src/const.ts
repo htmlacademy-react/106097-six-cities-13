@@ -46,3 +46,12 @@ export const SortTypes = {
 };
 
 export const DEFAULT_SORT_TYPE = 'Popular';
+
+export const APIRoute = {
+  Offers: '/offers',
+  NearbyOffers: '/nearby',
+  Favorite: '/favorite',
+  Comments: '/comments',
+  Login: '/login',
+  Logout: '/logout',
+};

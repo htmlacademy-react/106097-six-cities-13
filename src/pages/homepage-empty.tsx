@@ -1,9 +1,10 @@
 import { Header } from '../components/header';
 import { useAppSelector } from '../hooks';
 import { CitiesList } from '../components/cities-list';
+import * as selectors from '../store/selectors';
 
 export function HomepageEmpty() {
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(selectors.activeCity);
   return (
     <div className="page page--gray page--main">
       <Header isNavigationOn='true'/>

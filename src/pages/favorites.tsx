@@ -4,9 +4,10 @@ import { Footer } from '../components/footer';
 import { PlaceCard } from '../components/place-card';
 import { cardTypesClasses } from '../const';
 import { useAppSelector } from '../hooks';
+import * as selectors from '../store/selectors';
 
 export function Favorites() {
-  const favoriteOffers = useAppSelector((state) => state.offers.filter((offer) => offer.isFavorite));
+  const favoriteOffers = useAppSelector(selectors.favoriteOffers);
   const cities: Set<string> = new Set (favoriteOffers.map((element) => element.city.name));
   const citiesArray: string[] = [];
   cities.forEach((element) => citiesArray.push(element));

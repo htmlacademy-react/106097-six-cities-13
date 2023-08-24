@@ -1,8 +1,9 @@
 import { Offers } from '../types/offer';
 import { useAppSelector } from '../hooks';
+import { selectors } from '../middleware/index';
 
 export function HeaderNavigation() {
-  const offers: Offers = useAppSelector((state) => state.offers.filter((offer) => offer.isFavorite === true));
+  const offers: Offers = useAppSelector(selectors.favoriteOffers);
 
   return (
     <nav className="header__nav">

@@ -7,12 +7,12 @@ import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
-import { nearbyOffers } from '../mocks/nearby-offers';
 import { useAppSelector } from '../hooks';
+import { selectors } from '../middleware/index';
 
 export function App() {
-  const offers = useAppSelector((state) => state.offers);
-  const offersNearby = nearbyOffers;
+  const offers = useAppSelector(selectors.offers);
+  // const offersNearby = nearbyOffers;
 
   return (
     <HelmetProvider>
@@ -42,7 +42,7 @@ export function App() {
                 </PrivateRoute>
               }
             />
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} />
+            {/* <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} /> */}
             <Route path={AppRoute.NotFound} element={<NotFound />} />
             <Route path="*" element={<NotFound />} />
           </Route>

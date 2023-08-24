@@ -1,21 +1,22 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, addToFavorites, selectOffer, sort } from './action';
+import { changeCity, addToFavorites, selectOffer, sort, loadOffers, setOffersDataLoadingStatus } from './action';
 import { Offer, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE } from '../const';
-import { offers } from '../mocks/offers';
 
 type stateType = {
   city: string;
   offers: Offers;
   activeOffer: string;
   sortType: string;
+  isOffersDataLoading: boolean;
 }
 
 const initialState: stateType = {
   city: DEFAULT_ACTIVE_CITY,
-  offers: offers,
+  offers: [],
   activeOffer: '',
   sortType: DEFAULT_SORT_TYPE,
+  isOffersDataLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -50,5 +51,11 @@ export const reducer = createReducer(initialState, (builder) => {
         default:
           state.offers = offers;
       }
+    })
+    .addCase(loadOffers, (state: stateType, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(setOffersDataLoadingStatus, (state: stateType, action) => {
+      state.isOffersDataLoading = action.payload;
     });
 });
