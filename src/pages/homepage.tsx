@@ -7,7 +7,7 @@ import { CitiesList } from '../components/cities-list';
 import { DEFAULT_CITY, mapClasses } from '../const';
 import { useAppSelector } from '../hooks';
 import { Sort } from '../components/sort';
-import * as selectors from '../store/selectors';
+import { selectors } from '../middleware/index';
 
 type HomepageProps = {
   offers: Offers;

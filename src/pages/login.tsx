@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/header';
 import { FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { loginAction } from '../store/api-actions';
 
 export function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -18,7 +19,7 @@ export function Login() {
         passwod: passwordRef.current.value,
       }));
     }
-  }
+  };
 
   return (
     <div className="page page--gray page--login">

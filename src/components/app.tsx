@@ -1,4 +1,4 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Homepage } from '../pages/homepage';
 import { NotFound } from '../pages/not-found';
 import { AppRoute, AuthorizationStatus } from '../const';
@@ -9,32 +9,29 @@ import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
 import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
+import HistoryRouter from './history-route';
+import browserHistory from '../browser-history';
 
 export function App() {
+  const authorizationStatus = useAppSelector(selectors.authorizationStatus);
   const offers = useAppSelector(selectors.offers);
   // const offersNearby = nearbyOffers;
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Root}>
             <Route index element={<Homepage offers={offers} />} />
             <Route
               path={AppRoute.Login}
-              element={
-                <PrivateRoute
-                  restrictedFor={AuthorizationStatus.Auth}
-                  redirectTo={AppRoute.Root}
-                >
-                  <Login />
-                </PrivateRoute>
-              }
+              element={<Login />}
             />
             <Route
               path={AppRoute.Favorites}
               element={
                 <PrivateRoute
+                  authorizationStatus={authorizationStatus}
                   restrictedFor={AuthorizationStatus.NoAuth}
                   redirectTo={AppRoute.Login}
                 >
@@ -47,7 +44,7 @@ export function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

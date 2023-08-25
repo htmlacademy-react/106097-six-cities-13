@@ -17,7 +17,7 @@ export const AppRoute = {
   Favorites: '/favorites',
   Offer: '/offer',
   NotFound: '/404',
-};
+} as const;
 
 export const AuthorizationStatus = {
   Auth: 'AUTH',
