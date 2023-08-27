@@ -4,7 +4,7 @@ import { Footer } from '../components/footer';
 import { PlaceCard } from '../components/place-card';
 import { cardTypesClasses } from '../const';
 import { useAppSelector } from '../hooks';
-import * as selectors from '../store/selectors';
+import { selectors } from '../middleware/index';
 
 export function Favorites() {
   const favoriteOffers = useAppSelector(selectors.favoriteOffers);

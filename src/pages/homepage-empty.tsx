@@ -1,7 +1,7 @@
 import { Header } from '../components/header';
 import { useAppSelector } from '../hooks';
 import { CitiesList } from '../components/cities-list';
-import * as selectors from '../store/selectors';
+import { selectors } from '../middleware/index';
 
 export function HomepageEmpty() {
   const activeCity = useAppSelector(selectors.activeCity);

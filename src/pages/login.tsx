@@ -1,7 +1,26 @@
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/header';
+import { FormEvent, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../store/api-actions';
 
 export function Login() {
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (loginRef.current !== null && passwordRef.current !== null) {
+      dispatch(loginAction({
+        login: loginRef.current.value,
+        passwod: passwordRef.current.value,
+      }));
+    }
+  };
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -12,10 +31,16 @@ export function Login() {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              onSubmit={handleSubmit}
+              className="login__form form"
+              action="#"
+              method="post"
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
+                  ref={loginRef}
                   className="login__input form__input"
                   type="email"
                   name="email"
@@ -26,6 +51,7 @@ export function Login() {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
+                  ref={passwordRef}
                   className="login__input form__input"
                   type="password"
                   name="password"
@@ -33,7 +59,10 @@ export function Login() {
                   required
                 />
               </div>
-              <button className="login__submit form__submit button" type="submit">
+              <button
+                className="login__submit form__submit button"
+                type="submit"
+              >
                 Sign in
               </button>
             </form>

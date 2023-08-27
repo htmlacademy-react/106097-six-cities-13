@@ -17,13 +17,13 @@ export const AppRoute = {
   Favorites: '/favorites',
   Offer: '/offer',
   NotFound: '/404',
-};
+} as const;
 
 export const AuthorizationStatus = {
   Auth: 'AUTH',
   NoAuth: 'NO_AUTH',
   Unknown: 'UNKNOWN',
-};
+} as const;
 
 export const MAX_RATING = 5;
 
