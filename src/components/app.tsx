@@ -9,8 +9,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
 import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
-import HistoryRouter from './history-route';
-import browserHistory from '../browser-history';
 
 export function App() {
   const authorizationStatus = useAppSelector(selectors.authorizationStatus);
@@ -19,32 +17,29 @@ export function App() {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
-        <Routes>
-          <Route path={AppRoute.Root}>
-            <Route index element={<Homepage offers={offers} />} />
-            <Route
-              path={AppRoute.Login}
-              element={<Login />}
-            />
-            <Route
-              path={AppRoute.Favorites}
-              element={
-                <PrivateRoute
-                  authorizationStatus={authorizationStatus}
-                  restrictedFor={AuthorizationStatus.NoAuth}
-                  redirectTo={AppRoute.Login}
-                >
-                  <Favorites />
-                </PrivateRoute>
-              }
-            />
-            {/* <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} /> */}
-            <Route path={AppRoute.NotFound} element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </HistoryRouter>
+      <Routes>
+        <Route path={AppRoute.Root}>
+          <Route index element={<Homepage offers={offers} />} />
+          <Route
+            path={AppRoute.Login}
+            element={<Login />}
+          />
+          <Route
+            path={AppRoute.Favorites}
+            element={
+              <PrivateRoute
+                restrictedFor={AuthorizationStatus.NoAuth}
+                redirectTo={AppRoute.Login}
+              >
+                <Favorites />
+              </PrivateRoute>
+            }
+          />
+          {/* <Route path={`${AppRoute.Offer}/:id`} element={<OfferComponent offers={offers} nearbyOffers={offersNearby}/>} /> */}
+          <Route path={AppRoute.NotFound} element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </HelmetProvider>
   );
 }
