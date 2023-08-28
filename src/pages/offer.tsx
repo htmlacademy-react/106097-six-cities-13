@@ -31,7 +31,7 @@ export function OfferComponent() {
   const offer: Offer | null = useAppSelector(selectors.activeOffer);
   const reviews: Reviews | null = useAppSelector(selectors.reviews);
   const nearbyOffers: Offers | null = useAppSelector(selectors.offersNearby);
-  const offersForMap = [offer, ...nearbyOffers.slice(0, MAX_NERBY_OFFERS)];
+  const offersForMap = nearbyOffers.slice(0, MAX_NERBY_OFFERS);
   const offerLoadingStatus = useAppSelector(selectors.offerLoadingStatus);
   const offersNearbyLoadingStatus = useAppSelector(selectors.offersNearbyLoadingStatus);
   const reviewsLoadingStatus = useAppSelector(selectors.reviewsLoadingStatus);
@@ -142,7 +142,7 @@ export function OfferComponent() {
                 </div>
               </div>
               <section className="offer__map map">
-                <Map city={offer.city} points={offersForMap} mapHeight={579} block={mapClasses.offer}/>
+                <Map city={offer.city} points={offersForMap} selectedPoint={offer} mapHeight={579} block={mapClasses.offer}/>
               </section>
             </section>
             <div className="container">

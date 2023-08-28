@@ -2,9 +2,7 @@ import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, City } from '../types/offer';
-import { useAppSelector } from '../hooks';
-import { selectors } from '../middleware/index';
+import { Offers, Offer, City } from '../types/offer';
 
 const URL_MARKER_DEFAULT = '../../public/img/pin.svg';
 const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
@@ -12,15 +10,14 @@ const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
 type MapProps = {
   city: City;
   points: Offers;
+  selectedPoint?: Offer;
   mapHeight: number;
   block: string;
 }
 
-export function Map({city, points, mapHeight, block}: MapProps) {
+export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
-
-  const selectedPoint = useAppSelector(selectors.activeOffer);
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: URL_MARKER_DEFAULT,
@@ -43,10 +40,20 @@ export function Map({city, points, mapHeight, block}: MapProps) {
             lat: point.location.latitude,
             lng: point.location.longitude,
           }, {
-            icon: selectedPoint?.id === point.id ? currentCustomIcon : defaultCustomIcon,
+            icon: defaultCustomIcon,
           })
           .addTo(placeLayer);
       });
+      if (selectedPoint) {
+        leaflet
+          .marker({
+            lat: selectedPoint.location.latitude,
+            lng: selectedPoint.location.longitude,
+          }, {
+            icon: currentCustomIcon,
+          })
+          .addTo(placeLayer);
+      }
       return () => {
         map.removeLayer(placeLayer);
       };
