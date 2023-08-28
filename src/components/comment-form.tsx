@@ -1,8 +1,11 @@
-import { Fragment, useState } from 'react';
+import { FormEvent, Fragment, useState } from 'react';
 import { ChangeEvent } from 'react';
+import { useAppDispatch } from '../hooks';
+import { postReview } from '../store/api-actions';
 
 const MIN_COMMENTS_LENGTH = 50;
 const MAX_COMMENTS_LENGTH = 500;
+const MIN_RATING = 1;
 
 const ratingMap = {
   '5': 'perfect',
@@ -12,26 +15,38 @@ const ratingMap = {
   '1': 'terribly'
 };
 
-export function CommentForm() {
-  const [formData, setFormData] = useState({
-    rating: '',
+type CommentFormProps = {
+  offerId: string;
+}
+
+export function CommentForm({offerId}: CommentFormProps) {
+  const [reviewData, setReviewData] = useState({
+    rating: MIN_RATING,
     review: '',
   });
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, rating: evt.target.value});
+    setReviewData({...reviewData, rating: Number(evt.target.value)});
   };
 
   const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormData({...formData, review: evt.target.value});
+    setReviewData({...reviewData, review: evt.target.value});
   };
 
-  const isValid = formData.review.length >= MIN_COMMENTS_LENGTH
-  && formData.review.length <= MAX_COMMENTS_LENGTH
-  && formData.rating !== '';
+  const isValid = reviewData.review.length >= MIN_COMMENTS_LENGTH
+  && reviewData.review.length <= MAX_COMMENTS_LENGTH;
+
+  const dispatch = useAppDispatch();
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    if (!isValid) {
+      return;
+    }
+    dispatch(postReview({reviewData, offerId}));
+  };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
@@ -46,7 +61,7 @@ export function CommentForm() {
                 value={score}
                 id={`${score}-stars`}
                 type="radio"
-                checked={formData.rating === score}
+                checked={reviewData.rating === Number(score)}
                 onChange={handleRatingChange}
               />
               <label
@@ -67,7 +82,7 @@ export function CommentForm() {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewChange}
-        value={formData.review}
+        value={reviewData.review}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

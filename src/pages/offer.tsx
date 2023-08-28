@@ -137,7 +137,7 @@ export function OfferComponent() {
                       Reviews · <span className="reviews__amount">{reviews.length}</span>
                     </h2>
                     {reviewsLoadingStatus === RequestStatus.Success ? <ReviewsList reviews={reviews} /> : ''}
-                    {authorizationStatus === AuthorizationStatus.Auth ? <CommentForm /> : ''}
+                    {authorizationStatus === AuthorizationStatus.Auth && offerId ? <CommentForm offerId={offerId} /> : ''}
                   </section>
                 </div>
               </div>

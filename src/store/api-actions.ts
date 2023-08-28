@@ -6,7 +6,7 @@ import { Offer, Offers } from '../types/offer';
 import { redirectToRoute, requireAuthorization } from './action';
 import { UserData } from '../types/user-data';
 import { saveToken } from '../services/token';
-import { Reviews } from '../types/review';
+import { Review, ReviewData, Reviews } from '../types/review';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
@@ -99,5 +99,17 @@ export const loginAction = createAsyncThunk<void, undefined, {
     saveToken(token);
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Root));
+  }
+);
+
+export const postReview = createAsyncThunk<Review, {reviewData: ReviewData; offerId: Offer['id']}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/postReview',
+  async ({reviewData, offerId}, {extra: api}) => {
+    const {data} = await api.post<Review>(`${APIRoute.Reviews}/${offerId}`, reviewData);
+    return data;
   }
 );
