@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Offers, Offer } from '../types/offer';
 import { useParams } from 'react-router-dom';
-import { MAX_NERBY_OFFERS, MAX_RATING, RequestStatus, mapClasses } from '../const';
+import { AuthorizationStatus, MAX_NERBY_OFFERS, MAX_RATING, RequestStatus, mapClasses } from '../const';
 import { capitalizeFirstLetter } from '../utils';
 import { Header } from '../components/header';
 import { CommentForm } from '../components/comment-form';
@@ -13,17 +13,12 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { useEffect } from 'react';
 import { selectors } from '../middleware/index';
 import { Loading } from '../components/loading';
-import {toast} from 'react-toastify';
 import { Reviews } from '../types/review';
 import { NotFound } from './not-found';
 
 export function OfferComponent() {
   const { id: offerId } = useParams();
   const dispatch = useAppDispatch();
-  const sendingStatus = useAppSelector(selectors.offerLoadingStatus);
-  if (sendingStatus === RequestStatus.Error) {
-    toast.warn('Ошибка загрузки данных.');
-  }
 
   useEffect(() => {
     if (offerId === undefined) {
@@ -40,6 +35,7 @@ export function OfferComponent() {
   const offerLoadingStatus = useAppSelector(selectors.offerLoadingStatus);
   const offersNearbyLoadingStatus = useAppSelector(selectors.offersNearbyLoadingStatus);
   const reviewsLoadingStatus = useAppSelector(selectors.reviewsLoadingStatus);
+  const authorizationStatus = useAppSelector(selectors.authorizationStatus);
 
   return (
     <div className="page">
@@ -141,7 +137,7 @@ export function OfferComponent() {
                       Reviews · <span className="reviews__amount">{reviews.length}</span>
                     </h2>
                     {reviewsLoadingStatus === RequestStatus.Success ? <ReviewsList reviews={reviews} /> : ''}
-                    <CommentForm />
+                    {authorizationStatus === AuthorizationStatus.Auth ? <CommentForm /> : ''}
                   </section>
                 </div>
               </div>
