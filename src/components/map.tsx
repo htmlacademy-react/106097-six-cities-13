@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, City, NearbyOffers } from '../types/offer';
+import { Offers, City } from '../types/offer';
 import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
 
@@ -11,7 +11,7 @@ const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
 
 type MapProps = {
   city: City;
-  points: Offers | NearbyOffers;
+  points: Offers;
   mapHeight: number;
   block: string;
 }
@@ -43,7 +43,7 @@ export function Map({city, points, mapHeight, block}: MapProps) {
             lat: point.location.latitude,
             lng: point.location.longitude,
           }, {
-            icon: selectedPoint === point.id ? currentCustomIcon : defaultCustomIcon,
+            icon: selectedPoint?.id === point.id ? currentCustomIcon : defaultCustomIcon,
           })
           .addTo(placeLayer);
       });

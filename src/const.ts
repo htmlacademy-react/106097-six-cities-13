@@ -1,4 +1,5 @@
-export const DEFAULT_ACTIVE_CITY = 'Amsterdam';
+export const DEFAULT_ACTIVE_CITY = 'Paris';
+export const MAX_NERBY_OFFERS = 3;
 
 export const DEFAULT_CITY = {
   'name': 'Amsterdam',
@@ -15,7 +16,7 @@ export const AppRoute = {
   Root: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer',
+  Offers: '/offers',
   NotFound: '/404',
 } as const;
 
@@ -51,7 +52,14 @@ export const APIRoute = {
   Offers: '/offers',
   NearbyOffers: '/nearby',
   Favorite: '/favorite',
-  Comments: '/comments',
+  Reviews: '/comments',
   Login: '/login',
   Logout: '/logout',
+};
+
+export const RequestStatus = {
+  Idle: 'Idle',
+  Pending: 'Pending',
+  Success: 'Success',
+  Error: 'Error',
 };

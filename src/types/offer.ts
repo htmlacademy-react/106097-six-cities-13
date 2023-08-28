@@ -45,18 +45,3 @@ export type Location = {
 };
 
 export type Offers = OfferPreview[];
-
-export type NearbyOffer = {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: City;
-  location: Location;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-}
-
-export type NearbyOffers = NearbyOffer[];

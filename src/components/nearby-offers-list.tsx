@@ -1,9 +1,9 @@
-import { NearbyOffers } from '../types/offer';
+import { Offers } from '../types/offer';
 import { cardTypesClasses } from '../const';
 import { PlaceCard } from './place-card';
 
 type NearbyOffersListProps = {
-  offers: NearbyOffers;
+  offers: Offers;
 }
 
 export function NearbyOffersList({offers}: NearbyOffersListProps) {
@@ -13,7 +13,7 @@ export function NearbyOffersList({offers}: NearbyOffersListProps) {
         <PlaceCard
           key={offer.id}
           id={offer.id}
-          images={[offer.previewImage]}
+          image={offer.previewImage}
           price={offer.price}
           isFavorite={offer.isFavorite}
           rating={offer.rating}
