@@ -1,19 +1,18 @@
 import { Helmet } from 'react-helmet-async';
-import { Offers } from '../types/offer';
 import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
 import { Map } from '../components/map';
 import { CitiesList } from '../components/cities-list';
-import { DEFAULT_CITY, mapClasses } from '../const';
+import { DEFAULT_CITY, RequestStatus, mapClasses } from '../const';
 import { useAppSelector } from '../hooks';
 import { Sort } from '../components/sort';
 import { selectors } from '../middleware/index';
+import { Loading } from '../components/loading';
+import { NotFound } from './not-found';
 
-type HomepageProps = {
-  offers: Offers;
-}
-
-export function Homepage({offers}: HomepageProps) {
+export function Homepage() {
+  const offers = useAppSelector(selectors.offers);
+  const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus)
   const activeCity = useAppSelector(selectors.activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   let city = cityObject?.city;
@@ -22,6 +21,10 @@ export function Homepage({offers}: HomepageProps) {
   }
 
   return (
+    <>
+      {offersLoadingStatus === RequestStatus.Pending && <Loading/>}
+      {offersLoadingStatus === RequestStatus.Error && <NotFound/>}
+      {offersLoadingStatus === RequestStatus.Success &&
     <div className="page page--gray page--main">
       <Helmet>
         <title>6 cities homepage</title>
@@ -48,7 +51,7 @@ export function Homepage({offers}: HomepageProps) {
           </div>
         </div>
       </main>
-    </div>
-
+    </div>}
+    </>
   );
 }

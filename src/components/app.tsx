@@ -7,17 +7,13 @@ import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
-import { useAppSelector } from '../hooks';
-import { selectors } from '../middleware/index';
 
 export function App() {
-  const offers = useAppSelector(selectors.offers);
-
   return (
     <HelmetProvider>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<Homepage offers={offers} />} />
+          <Route index element={<Homepage/>} />
           <Route
             path={AppRoute.Login}
             element={<Login />}
