@@ -1,9 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, Extra, State } from '../types/state';
+import { Extra } from '../types/state';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { Offer, Offers } from '../types/offer';
 import { redirectToRoute, requireAuthorization } from './action';
-import { UserData } from '../types/user-data';
 import { saveToken } from '../services/token';
 import { Review, ReviewData, Reviews } from '../types/review';
 import { AuthData } from '../types/auth-data';
@@ -71,11 +70,17 @@ export const checkAuthAction = createAsyncThunk<void, undefined, Extra>(
 
 export const loginAction = createAsyncThunk<AuthorizedUser, AuthData, Extra>(
   'user/login',
-  async ({login: email, password}, {dispatch, extra: api}) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    dispatch(redirectToRoute(AppRoute.Root));
+  async ({email, password}, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.post<AuthorizedUser>(APIRoute.Login, {email, password});
+      saveToken(data.token);
+      dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(redirectToRoute(AppRoute.Root));
+      return data;
+    } catch {
+      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      throw Error;
+    }
   }
 );
 

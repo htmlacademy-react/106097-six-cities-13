@@ -14,7 +14,6 @@ export function Homepage() {
   const offers = useAppSelector(selectors.offers);
   const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus);
   const activeCity = useAppSelector(selectors.activeCity);
-  console.log(activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   const city = cityObject?.city;
   if (city === undefined) {
