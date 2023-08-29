@@ -1,15 +1,6 @@
 export const DEFAULT_ACTIVE_CITY = 'Paris';
 export const MAX_NERBY_OFFERS = 3;
 
-export const DEFAULT_CITY = {
-  'name': 'Amsterdam',
-  'location': {
-    'latitude': 52.3909553943508,
-    'longitude': 4.85309666406198,
-    'zoom': 8
-  }
-};
-
 export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const AppRoute = {

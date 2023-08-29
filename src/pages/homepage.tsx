@@ -3,7 +3,7 @@ import { PlaceCardList } from '../components/place-card-list';
 import { Header } from '../components/header';
 import { Map } from '../components/map';
 import { CitiesList } from '../components/cities-list';
-import { DEFAULT_CITY, RequestStatus, mapClasses } from '../const';
+import { RequestStatus, mapClasses } from '../const';
 import { useAppSelector } from '../hooks';
 import { Sort } from '../components/sort';
 import { selectors } from '../middleware/index';
@@ -12,12 +12,12 @@ import { NotFound } from './not-found';
 
 export function Homepage() {
   const offers = useAppSelector(selectors.offers);
-  const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus)
+  const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus);
   const activeCity = useAppSelector(selectors.activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
-  let city = cityObject?.city;
+  const city = cityObject?.city;
   if (city === undefined) {
-    city = DEFAULT_CITY;
+    return;
   }
 
   return (
