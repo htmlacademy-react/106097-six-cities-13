@@ -38,7 +38,6 @@ export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state: stateType, action) => {
       state.city = action.payload;
-      state.offers = offers.filter((offer) => offer.city.name === action.payload);
     })
     .addCase(addToFavorites, (state: stateType, action) => {
       const offer: OfferPreview | undefined = state.offers.find((element) => element.id === action.payload);

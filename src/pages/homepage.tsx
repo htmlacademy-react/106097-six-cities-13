@@ -14,6 +14,7 @@ export function Homepage() {
   const offers = useAppSelector(selectors.offers);
   const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus);
   const activeCity = useAppSelector(selectors.activeCity);
+  console.log(activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   const city = cityObject?.city;
   if (city === undefined) {
@@ -34,7 +35,7 @@ export function Homepage() {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations constainer">
-            <CitiesList activeCity={activeCity}/>
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
