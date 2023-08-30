@@ -14,6 +14,7 @@ export function Homepage() {
   const offers = useAppSelector(selectors.offers);
   const offersLoadingStatus = useAppSelector(selectors.offersLoadingStatus);
   const activeCity = useAppSelector(selectors.activeCity);
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   const city = cityObject?.city;
   if (city === undefined) {
@@ -41,12 +42,12 @@ export function Homepage() {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+              <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
               <Sort />
-              <PlaceCardList />
+              <PlaceCardList offers={filteredOffers} />
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={offers} mapHeight={500} block={mapClasses.homepage}/>
+              <Map city={city} points={filteredOffers} mapHeight={500} block={mapClasses.homepage}/>
             </div>
           </div>
         </div>
