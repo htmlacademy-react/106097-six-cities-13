@@ -57,5 +57,6 @@ export const RequestStatus = {
 
 export const NameSpace = {
   Data: 'data',
+  Interactions: 'interactions',
   User: 'user',
 };
