@@ -5,12 +5,17 @@ import { PlaceCard } from '../components/place-card';
 import { cardTypesClasses } from '../const';
 import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
+import { FavoritesEmpty } from './favorites-empty';
 
 export function Favorites() {
   const favoriteOffers = useAppSelector(selectors.favoriteOffers);
   const cities: Set<string> = new Set (favoriteOffers.map((element) => element.city.name));
   const citiesArray: string[] = [];
   cities.forEach((element) => citiesArray.push(element));
+
+  if (!favoriteOffers.length) {
+    return <FavoritesEmpty />;
+  }
 
   return (
     <div className="page">
@@ -38,7 +43,7 @@ export function Favorites() {
                         key={element.id}
                         id={element.id}
                         isPremium={element.isPremium}
-                        images={element.images}
+                        image={element.previewImage}
                         price={element.price}
                         isFavorite={element.isFavorite}
                         rating={element.rating}
