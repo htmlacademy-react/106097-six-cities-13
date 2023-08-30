@@ -1,29 +1,19 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { changeCity, addToFavorites, selectOffer, sort, requireAuthorization } from './action';
-import { OfferPreview, Offers } from '../types/offer';
-import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE, AuthorizationStatus, RequestStatus } from '../const';
-import { AuthorizationStatusType, RequestStatusType } from '../types/consts';
-import { Reviews } from '../types/review';
-import { fetchOffersNearbyAction, fetchReviewsAction } from './api-actions';
+import { OfferPreview } from '../types/offer';
+import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE, AuthorizationStatus } from '../const';
+import { AuthorizationStatusType } from '../types/consts';
 
 type stateType = {
   city: string;
   sortType: string;
   authorizationStatus: AuthorizationStatusType;
-  reviews: Reviews;
-  reviewsSendingStatus: RequestStatusType;
-  offersNearby: Offers;
-  offersNearbySendingStatus: RequestStatusType;
 }
 
 const initialState: stateType = {
   city: DEFAULT_ACTIVE_CITY,
   sortType: DEFAULT_SORT_TYPE,
   authorizationStatus: AuthorizationStatus.Unknown,
-  reviews: [],
-  reviewsSendingStatus: RequestStatus.Idle,
-  offersNearby: [],
-  offersNearbySendingStatus: RequestStatus.Idle,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -57,26 +47,6 @@ export const reducer = createReducer(initialState, (builder) => {
         default:
           state.offers = offers;
       }
-    })
-    .addCase(fetchReviewsAction.pending, (state: stateType) => {
-      state.reviewsSendingStatus = RequestStatus.Pending;
-    })
-    .addCase(fetchReviewsAction.fulfilled, (state: stateType, action) => {
-      state.reviewsSendingStatus = RequestStatus.Success;
-      state.reviews = action.payload;
-    })
-    .addCase(fetchReviewsAction.rejected, (state: stateType) => {
-      state.reviewsSendingStatus = RequestStatus.Error;
-    })
-    .addCase(fetchOffersNearbyAction.pending, (state: stateType) => {
-      state.offersNearbySendingStatus = RequestStatus.Pending;
-    })
-    .addCase(fetchOffersNearbyAction.fulfilled, (state: stateType, action) => {
-      state.offersNearbySendingStatus = RequestStatus.Success;
-      state.offersNearby = action.payload;
-    })
-    .addCase(fetchOffersNearbyAction.rejected, (state: stateType) => {
-      state.offersNearbySendingStatus = RequestStatus.Error;
     })
     .addCase(requireAuthorization, (state: stateType, action) => {
       state.authorizationStatus = action.payload;
