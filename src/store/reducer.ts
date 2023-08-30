@@ -1,17 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { changeCity, addToFavorites, selectOffer, sort, requireAuthorization } from './action';
-import { Offer, OfferPreview, Offers } from '../types/offer';
+import { OfferPreview, Offers } from '../types/offer';
 import { DEFAULT_ACTIVE_CITY, SortTypes, DEFAULT_SORT_TYPE, AuthorizationStatus, RequestStatus } from '../const';
 import { AuthorizationStatusType, RequestStatusType } from '../types/consts';
 import { Reviews } from '../types/review';
-import { fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction, fetchReviewsAction } from './api-actions';
+import { fetchOffersNearbyAction, fetchReviewsAction } from './api-actions';
 
 type stateType = {
   city: string;
-  offers: Offers;
-  offersSendingStatus: RequestStatusType;
-  activeOffer: Offer | null;
-  offerSendingStatus: RequestStatusType;
   sortType: string;
   authorizationStatus: AuthorizationStatusType;
   reviews: Reviews;
@@ -22,10 +18,6 @@ type stateType = {
 
 const initialState: stateType = {
   city: DEFAULT_ACTIVE_CITY,
-  offers: [],
-  offersSendingStatus: RequestStatus.Idle,
-  activeOffer: null,
-  offerSendingStatus: RequestStatus.Idle,
   sortType: DEFAULT_SORT_TYPE,
   authorizationStatus: AuthorizationStatus.Unknown,
   reviews: [],
@@ -65,26 +57,6 @@ export const reducer = createReducer(initialState, (builder) => {
         default:
           state.offers = offers;
       }
-    })
-    .addCase(fetchOffersAction.pending, (state: stateType) => {
-      state.offersSendingStatus = RequestStatus.Pending;
-    })
-    .addCase(fetchOffersAction.fulfilled, (state: stateType, action) => {
-      state.offersSendingStatus = RequestStatus.Success;
-      state.offers = action.payload;
-    })
-    .addCase(fetchOffersAction.rejected, (state: stateType) => {
-      state.offerSendingStatus = RequestStatus.Error;
-    })
-    .addCase(fetchOfferAction.pending, (state: stateType) => {
-      state.offerSendingStatus = RequestStatus.Pending;
-    })
-    .addCase(fetchOfferAction.fulfilled, (state: stateType, action) => {
-      state.offerSendingStatus = RequestStatus.Success;
-      state.activeOffer = action.payload;
-    })
-    .addCase(fetchOfferAction.rejected, (state: stateType) => {
-      state.offerSendingStatus = RequestStatus.Error;
     })
     .addCase(fetchReviewsAction.pending, (state: stateType) => {
       state.reviewsSendingStatus = RequestStatus.Pending;
