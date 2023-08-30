@@ -7,18 +7,20 @@ import { loginAction } from '../store/api-actions';
 export function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useDispatch();
+
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      dispatch(loginAction({
-        login: loginRef.current.value,
-        passwod: passwordRef.current.value,
-      }));
+    if (!(loginRef.current && passwordRef.current)) {
+      return;
     }
+
+    dispatch(loginAction({
+      email: loginRef.current.value,
+      password: passwordRef.current.value,
+    }));
   };
 
   return (
