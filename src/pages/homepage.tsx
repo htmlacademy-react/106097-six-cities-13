@@ -9,6 +9,7 @@ import { Sort } from '../components/sort';
 import { selectors } from '../middleware/index';
 import { Loading } from '../components/loading';
 import { NotFound } from './not-found';
+import { HomepageEmpty } from './homepage-empty';
 
 export function Homepage() {
   const offers = useAppSelector(selectors.offers);
@@ -19,6 +20,10 @@ export function Homepage() {
   const city = cityObject?.city;
   if (city === undefined) {
     return;
+  }
+
+  if (!filteredOffers) {
+    return <HomepageEmpty />;
   }
 
   return (

@@ -12,7 +12,7 @@ export function HomepageEmpty() {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <CitiesList activeCity={activeCity}/>
+            <CitiesList />
           </section>
         </div>
         <div className="cities">
