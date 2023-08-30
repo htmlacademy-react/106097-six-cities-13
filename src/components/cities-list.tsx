@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, Cities } from '../const';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectors } from '../middleware';
-import { changeCity } from '../store/action';
+import { changeCity } from '../store/interactions/interactions';
 
 export function CitiesList() {
   const dispatch = useAppDispatch();

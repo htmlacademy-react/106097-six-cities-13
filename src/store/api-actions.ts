@@ -7,7 +7,6 @@ import { dropToken, saveToken } from '../services/token';
 import { Review, ReviewData, Reviews } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { AuthorizedUser } from '../types/authorized-user';
-import { api } from '.';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, Extra>(
   'data/fetchOffers',
@@ -66,7 +65,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, Extra>(
 
 export const logoutAction = createAsyncThunk<void, undefined, Extra>(
   'user/logout',
-  async (_arg, {extra: api}) {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
   }

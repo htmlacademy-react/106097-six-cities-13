@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../hooks';
-import { sort } from '../store/action';
 import { selectors } from '../middleware/index';
+import { sort } from '../store/offers-data/offers-data';
 
 const sortTypes = ['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'];
 

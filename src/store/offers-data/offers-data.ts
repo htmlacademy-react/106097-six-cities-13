@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_SORT_TYPE, NameSpace, RequestStatus, SortTypes } from '../../const';
 import { OffersData } from '../../types/offers-data';
-import { fetchOfferAction, fetchOffersAction } from '../api-actions';
-import { Offer, OfferPreview } from '../../types/offer';
+import { fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction, fetchReviewsAction } from '../api-actions';
+import { OfferPreview } from '../../types/offer';
 
 const initialState: OffersData = {
   offers: [],
@@ -10,6 +10,10 @@ const initialState: OffersData = {
   activeOffer: null,
   offerSendingStatus: RequestStatus.Idle,
   sortType: DEFAULT_SORT_TYPE,
+  offersNearby: [],
+  offersNearbySendingStatus: RequestStatus.Idle,
+  reviews: [],
+  reviewsSendingStatus: RequestStatus.Idle,
 };
 
 export const offersData = createSlice({
@@ -24,7 +28,7 @@ export const offersData = createSlice({
         offer.isFavorite = false;
       }
     },
-    selectOffer: (state: OffersData, action: PayloadAction<Offer>) => {
+    selectOffer: (state: OffersData, action: PayloadAction<string>) => {
       state.activeOffer = action.payload;
     },
     sort: (state: OffersData, action: PayloadAction<string>) => {
@@ -65,6 +69,26 @@ export const offersData = createSlice({
       })
       .addCase(fetchOfferAction.rejected, (state: OffersData) => {
         state.offerSendingStatus = RequestStatus.Error;
+      })
+      .addCase(fetchOffersNearbyAction.pending, (state: OffersData) => {
+        state.offersNearbySendingStatus = RequestStatus.Pending;
+      })
+      .addCase(fetchOffersNearbyAction.fulfilled, (state: OffersData, action) => {
+        state.offersNearbySendingStatus = RequestStatus.Success;
+        state.offersNearby = action.payload;
+      })
+      .addCase(fetchOffersNearbyAction.rejected, (state: OffersData) => {
+        state.offersNearbySendingStatus = RequestStatus.Error;
+      })
+      .addCase(fetchReviewsAction.pending, (state: OffersData) => {
+        state.reviewsSendingStatus = RequestStatus.Pending;
+      })
+      .addCase(fetchReviewsAction.fulfilled, (state: OffersData, action) => {
+        state.reviewsSendingStatus = RequestStatus.Success;
+        state.reviews = action.payload;
+      })
+      .addCase(fetchReviewsAction.rejected, (state: OffersData) => {
+        state.reviewsSendingStatus = RequestStatus.Error;
       });
   }
 });

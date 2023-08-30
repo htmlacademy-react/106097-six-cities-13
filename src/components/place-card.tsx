@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, MAX_RATING } from '../const';
 import { cardTypesClasses } from '../const';
 import { useAppDispatch } from '../hooks';
-import { addToFavorites, selectOffer } from '../store/action';
+import { addToFavorites, selectOffer } from '../store/offers-data/offers-data';
 
 type PlaceCardProps = {
   id: string;
