@@ -54,3 +54,9 @@ export const RequestStatus = {
   Success: 'Success',
   Error: 'Error',
 };
+
+export const NameSpace = {
+  Data: 'data',
+  Interactions: 'interactions',
+  User: 'user',
+} as const;

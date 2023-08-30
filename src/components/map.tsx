@@ -34,6 +34,7 @@ export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
   useEffect(() => {
     if (map) {
       const placeLayer = layerGroup().addTo(map);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
       points.forEach((point) => {
         leaflet
           .marker({
