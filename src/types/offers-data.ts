@@ -6,4 +6,5 @@ export type OffersData = {
   offersSendingStatus: RequestStatusType;
   activeOffer: Offer | null;
   offerSendingStatus: RequestStatusType;
+  sortType: string;
 };

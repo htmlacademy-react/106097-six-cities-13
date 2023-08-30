@@ -1,19 +1,49 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace, RequestStatus } from '../../const';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { DEFAULT_SORT_TYPE, NameSpace, RequestStatus, SortTypes } from '../../const';
 import { OffersData } from '../../types/offers-data';
 import { fetchOfferAction, fetchOffersAction } from '../api-actions';
+import { Offer, OfferPreview } from '../../types/offer';
 
 const initialState: OffersData = {
   offers: [],
   offersSendingStatus: RequestStatus.Idle,
   activeOffer: null,
   offerSendingStatus: RequestStatus.Idle,
+  sortType: DEFAULT_SORT_TYPE,
 };
 
 export const offersData = createSlice({
   name: NameSpace.Data,
   initialState,
-  reducers: {},
+  reducers: {
+    addToFavorites: (state, action: PayloadAction<string>) => {
+      const offer: OfferPreview | undefined = state.offers.find((element: OfferPreview) => element.id === action.payload);
+      if (!offer?.isFavorite && offer?.isFavorite !== undefined) {
+        offer.isFavorite = true;
+      } else if (offer?.isFavorite !== undefined) {
+        offer.isFavorite = false;
+      }
+    },
+    selectOffer: (state: OffersData, action: PayloadAction<Offer>) => {
+      state.activeOffer = action.payload;
+    },
+    sort: (state: OffersData, action: PayloadAction<string>) => {
+      state.sortType = action.payload;
+      switch (action.payload) {
+        case SortTypes.LOW_TO_HIGH:
+          state.offers = [...offers].sort((a, b) => a.price - b.price);
+          break;
+        case SortTypes.HIGH_TO_LOW:
+          state.offers = [...offers].sort((a, b) => b.price - a.price);
+          break;
+        case SortTypes.TOP_RATED:
+          state.offers = [...offers].sort((a, b) => b.rating - a.rating);
+          break;
+        default:
+          state.offers = offers;
+      }
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffersAction.pending, (state: OffersData) => {
@@ -39,3 +69,4 @@ export const offersData = createSlice({
   }
 });
 
+export const { addToFavorites, selectOffer, sort } = offersData.actions;
