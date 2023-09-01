@@ -1,13 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Extra } from '../types/state';
-import { APIRoute, AppRoute, AuthorizationStatus, NameSpace } from '../const';
+import { APIRoute, AppRoute, NameSpace } from '../const';
 import { Offer, Offers } from '../types/offer';
 import { redirectToRoute } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { Review, ReviewData, Reviews } from '../types/review';
 import { AuthData } from '../types/auth-data';
-import { UserInfo } from '../types/user';
-import { requireAuthorization } from './user/user';
+import { UserInfo } from '../types/user-data';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, Extra>(
   `${NameSpace.Data}/fetchOffers`,
@@ -57,19 +56,19 @@ export const fetchOffersNearbyAction = createAsyncThunk<Offers, {offerId: Offer[
   }
 );
 
-export const checkAuthAction = createAsyncThunk<void, undefined, Extra>(
+export const checkAuthAction = createAsyncThunk<UserInfo, undefined, Extra>(
   `${NameSpace.User}/checkAuth`,
   async (_arg, {extra: api}) => {
-    await api.get(APIRoute.Login);
+    const { data } = await api.get<UserInfo>(APIRoute.Login);
+    return data;
   }
 );
 
 export const logoutAction = createAsyncThunk<void, undefined, Extra>(
   `${NameSpace.User}/logout`,
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
 );
 
@@ -79,11 +78,9 @@ export const loginAction = createAsyncThunk<UserInfo, AuthData, Extra>(
     try {
       const {data} = await api.post<UserInfo>(APIRoute.Login, {email, password});
       saveToken(data.token);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
       dispatch(redirectToRoute(AppRoute.Root));
       return data;
     } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
       throw Error;
     }
   }
