@@ -7,6 +7,6 @@ export type FavoritesData = {
 };
 
 export type Favorites = {
-  favorites: Offers;
+  favorites: Offer[];
   favoritesSendingStatus: RequestStatusType;
 };

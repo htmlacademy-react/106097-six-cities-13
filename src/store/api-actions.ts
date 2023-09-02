@@ -7,7 +7,6 @@ import { dropToken, saveToken } from '../services/token';
 import { Review, ReviewData, Reviews } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { UserInfo } from '../types/user-data';
-import { FavoritesData } from '../types/favorites-data';
 import {toast} from 'react-toastify';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, Extra>(
