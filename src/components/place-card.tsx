@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
-import { AppRoute, MAX_RATING } from '../const';
+import { AppRoute, AuthorizationStatus, MAX_RATING } from '../const';
 import { cardTypesClasses } from '../const';
-import { useAppDispatch } from '../hooks';
-import { addToFavorites, selectOffer } from '../store/offers-data/offers-data';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectOffer } from '../store/offers-data/offers-data';
+import { selectors } from '../middleware';
+import { useState } from 'react';
+import { redirectToRoute } from '../store/action';
+import { addFavorite, deleteFavorite } from '../store/api-actions';
 
 type PlaceCardProps = {
   id: string;
@@ -29,7 +33,28 @@ export function PlaceCard({
 }: PlaceCardProps) {
   const dispatch = useAppDispatch();
 
-  const handeAddToFavorites = (offerId: string) => dispatch(addToFavorites(offerId));
+  const authStatus = useAppSelector(selectors.authorizationStatus);
+
+  const [isFavoriteItem, setIsFavoriteItem] = useState(isFavorite);
+
+  const handleAddToFavorites = (offerId: string) => {
+    if (authStatus === AuthorizationStatus.NoAuth || authStatus === AuthorizationStatus.Unknown) {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
+    try {
+      if (isFavoriteItem === false) {
+        dispatch(addFavorite(offerId));
+        setIsFavoriteItem(isFavoriteItem);
+      }
+      if (isFavoriteItem === true) {
+        dispatch(deleteFavorite(offerId));
+        setIsFavoriteItem(isFavoriteItem);
+      }
+    } finally {
+      setIsFavoriteItem((prevFavoriteStatus) => !prevFavoriteStatus);
+    }
+
+  };
 
   const handleMouseEvents = (activeOfferId: string) => dispatch(selectOffer(activeOfferId));
 
@@ -58,9 +83,9 @@ export function PlaceCard({
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`}
+            className={`place-card__bookmark-button ${(isFavoriteItem && authStatus === AuthorizationStatus.Auth) ? 'place-card__bookmark-button--active' : ''} button`}
             type="button"
-            onClick={() => handeAddToFavorites(id)}
+            onClick={() => handleAddToFavorites(id)}
           >
             <svg
               className="place-card__bookmark-icon"

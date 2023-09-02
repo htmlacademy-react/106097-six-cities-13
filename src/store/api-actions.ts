@@ -1,12 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Extra } from '../types/state';
-import { APIRoute, AppRoute, NameSpace } from '../const';
+import { APIRoute, AppRoute, FavoritesStatus, NameSpace } from '../const';
 import { Offer, Offers } from '../types/offer';
 import { redirectToRoute } from './action';
 import { dropToken, saveToken } from '../services/token';
 import { Review, ReviewData, Reviews } from '../types/review';
 import { AuthData } from '../types/auth-data';
 import { UserInfo } from '../types/user-data';
+import { FavoritesData } from '../types/favorites-data';
+import {toast} from 'react-toastify';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, Extra>(
   `${NameSpace.Data}/fetchOffers`,
@@ -27,6 +29,44 @@ export const fetchOfferAction = createAsyncThunk<Offer, {offerId: Offer['id']}, 
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
       return data;
     } catch {
+      throw Error;
+    }
+  }
+);
+
+export const fetchFavoritesAction = createAsyncThunk<Offers, undefined, Extra>(
+  `${NameSpace.Data}/fetchFavorites`,
+  async (_arg, {extra: api}) => {
+    try {
+      const {data} = await api.get<Offers>(`${APIRoute.Favorite}`);
+      return data;
+    } catch {
+      throw Error;
+    }
+  }
+);
+
+export const addFavorite = createAsyncThunk<Offer, Offer['id'], Extra>(
+  `${NameSpace.Data}/addFavorite`,
+  async (offerId, {extra: api}) => {
+    try {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${FavoritesStatus.Add}`);
+      return data;
+    } catch (error) {
+      toast.error(error.message);
+      throw Error;
+    }
+  }
+);
+
+export const deleteFavorite = createAsyncThunk<Offer, Offer['id'], Extra>(
+  `${NameSpace.Data}/deleteFavorite`,
+  async (offerId, {extra: api}) => {
+    try {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${FavoritesStatus.Delete}`);
+      return data;
+    } catch (error) {
+      toast.error(error.message);
       throw Error;
     }
   }

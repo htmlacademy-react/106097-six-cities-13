@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_SORT_TYPE, NameSpace, RequestStatus, SortTypes } from '../../const';
 import { OffersData } from '../../types/offers-data';
 import { fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction, fetchReviewsAction } from '../api-actions';
-import { OfferPreview } from '../../types/offer';
 
 const initialState: OffersData = {
   offers: [],
@@ -20,14 +19,6 @@ export const offersData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
-    addToFavorites: (state, action: PayloadAction<string>) => {
-      const offer: OfferPreview | undefined = state.offers.find((element: OfferPreview) => element.id === action.payload);
-      if (!offer?.isFavorite && offer?.isFavorite !== undefined) {
-        offer.isFavorite = true;
-      } else if (offer?.isFavorite !== undefined) {
-        offer.isFavorite = false;
-      }
-    },
     selectOffer: (state: OffersData, action: PayloadAction<string>) => {
       state.activeOffer = action.payload;
     },
@@ -93,4 +84,4 @@ export const offersData = createSlice({
   }
 });
 
-export const { addToFavorites, selectOffer, sort } = offersData.actions;
+export const { selectOffer, sort } = offersData.actions;

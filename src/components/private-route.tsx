@@ -3,7 +3,7 @@ import { useAppSelector } from '../hooks';
 import { selectors } from '../middleware';
 
 type PrivateRouteProps = {
-  restrictedFor: string;
+  restrictedFor: string[];
   redirectTo: string;
   children: JSX.Element;
 }
@@ -14,8 +14,9 @@ export function PrivateRoute({
   children
 }: PrivateRouteProps) {
   const authorizationStatus = useAppSelector(selectors.authorizationStatus);
+  const isRestricted = restrictedFor.includes(authorizationStatus);
 
-  return restrictedFor === authorizationStatus ? (
+  return isRestricted ? (
     <Navigate to={redirectTo} />
   ) : (
     children
