@@ -28,6 +28,7 @@ export const fetchOfferAction = createAsyncThunk<Offer, {offerId: Offer['id']}, 
       const {data} = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
       return data;
     } catch {
+      toast.error('Can\'t load offers.');
       throw Error;
     }
   }
@@ -40,6 +41,7 @@ export const fetchFavoritesAction = createAsyncThunk<Offers, undefined, Extra>(
       const {data} = await api.get<Offers>(`${APIRoute.Favorite}`);
       return data;
     } catch {
+      toast.error('Can\'t load favorites.');
       throw Error;
     }
   }
@@ -51,8 +53,8 @@ export const addFavorite = createAsyncThunk<Offer, Offer['id'], Extra>(
     try {
       const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${FavoritesStatus.Add}`);
       return data;
-    } catch (error) {
-      toast.error(error.message);
+    } catch {
+      toast.error('Can\'t add offer to favorite.');
       throw Error;
     }
   }
@@ -64,8 +66,8 @@ export const deleteFavorite = createAsyncThunk<Offer, Offer['id'], Extra>(
     try {
       const { data } = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${FavoritesStatus.Delete}`);
       return data;
-    } catch (error) {
-      toast.error(error.message);
+    } catch {
+      toast.error('Can\'t delete offer from favorites.');
       throw Error;
     }
   }
@@ -78,6 +80,7 @@ export const fetchReviewsAction = createAsyncThunk<Reviews, {offerId: Offer['id'
       const {data} = await api.get<Reviews>(`${APIRoute.Reviews}/${offerId}`);
       return data;
     } catch {
+      toast.error('Can\'t load reviews.');
       throw Error;
     }
   }
@@ -90,6 +93,7 @@ export const fetchOffersNearbyAction = createAsyncThunk<Offers, {offerId: Offer[
       const {data} = await api.get<Offers>(`${APIRoute.Offers}/${offerId}${APIRoute.NearbyOffers}`);
       return data;
     } catch {
+      toast.error('Can\'t load nearby offers.');
       throw Error;
     }
   }
@@ -121,6 +125,7 @@ export const loginAction = createAsyncThunk<UserInfo, AuthData, Extra>(
       dispatch(redirectToRoute(AppRoute.Root));
       return data;
     } catch {
+      toast.error('Login is failed.');
       throw Error;
     }
   }
@@ -129,7 +134,12 @@ export const loginAction = createAsyncThunk<UserInfo, AuthData, Extra>(
 export const postReview = createAsyncThunk<Review, {reviewData: ReviewData; offerId: Offer['id']}, Extra>(
   `${NameSpace.Data}/postReview`,
   async ({reviewData, offerId}, {extra: api}) => {
-    const {data} = await api.post<Review>(`${APIRoute.Reviews}/${offerId}`, reviewData);
-    return data;
+    try {
+      const {data} = await api.post<Review>(`${APIRoute.Reviews}/${offerId}`, reviewData);
+      return data;
+    } catch (error) {
+      toast.error('Can\'t post review.');
+      throw Error;
+    }
   }
 );
