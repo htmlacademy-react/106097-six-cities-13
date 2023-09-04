@@ -4,6 +4,7 @@ import { Reviews } from './review';
 
 export type OffersData = {
   offers: Offers;
+  nonSortedOffers: Offers;
   offersSendingStatus: RequestStatusType;
   activeOffer: Offer | null;
   offerSendingStatus: RequestStatusType;

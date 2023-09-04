@@ -66,3 +66,8 @@ export const FavoritesStatus = {
   Add: 1,
   Delete: 0,
 };
+
+export const SortStatus = {
+  closed: 'closed',
+  opened: 'opened',
+};

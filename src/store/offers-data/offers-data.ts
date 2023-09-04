@@ -5,6 +5,7 @@ import { fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction, fetchRevi
 
 const initialState: OffersData = {
   offers: [],
+  nonSortedOffers: [],
   offersSendingStatus: RequestStatus.Idle,
   activeOffer: null,
   offerSendingStatus: RequestStatus.Idle,
@@ -26,16 +27,16 @@ export const offersData = createSlice({
       state.sortType = action.payload;
       switch (action.payload) {
         case SortTypes.LOW_TO_HIGH:
-          state.offers = [...state.offers].sort((a, b) => a.price - b.price);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => a.price - b.price);
           break;
         case SortTypes.HIGH_TO_LOW:
-          state.offers = [...state.offers].sort((a, b) => b.price - a.price);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => b.price - a.price);
           break;
         case SortTypes.TOP_RATED:
-          state.offers = [...state.offers].sort((a, b) => b.rating - a.rating);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => b.rating - a.rating);
           break;
         default:
-          state.offers = [...state.offers];
+          state.offers = state.nonSortedOffers;
       }
     },
   },
@@ -47,6 +48,7 @@ export const offersData = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state: OffersData, action) => {
         state.offersSendingStatus = RequestStatus.Success;
         state.offers = action.payload;
+        state.nonSortedOffers = action.payload;
       })
       .addCase(fetchOffersAction.rejected, (state: OffersData) => {
         state.offersSendingStatus = RequestStatus.Error;
