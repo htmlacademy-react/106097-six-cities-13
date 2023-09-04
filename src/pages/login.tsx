@@ -1,19 +1,25 @@
 import { Helmet } from 'react-helmet-async';
 import { Header } from '../components/header';
 import { FormEvent, useRef } from 'react';
-import { useDispatch } from 'react-redux';
 import { loginAction } from '../store/api-actions';
+import { useAppDispatch } from '../hooks';
+import { toast } from 'react-toastify';
 
 export function Login() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useDispatch();
+  const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]+$/;
+  const dispatch = useAppDispatch();
 
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
-    if (!(loginRef.current && passwordRef.current)) {
+    if (passwordRef.current === null || loginRef.current === null) {
+      return;
+    }
+    const isValidPassword = passwordRegex.test(passwordRef.current.value.toString());
+    if (!isValidPassword) {
+      toast.error('Wrong password.');
       return;
     }
 
