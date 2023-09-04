@@ -9,6 +9,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
 
 export function App() {
+
   return (
     <HelmetProvider>
       <Routes>
@@ -16,13 +17,20 @@ export function App() {
           <Route index element={<Homepage/>} />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={
+              <PrivateRoute
+                restrictedFor={[AuthorizationStatus.Auth]}
+                redirectTo={AppRoute.Root}
+              >
+                <Login />
+              </PrivateRoute>
+            }
           />
           <Route
             path={AppRoute.Favorites}
             element={
               <PrivateRoute
-                restrictedFor={AuthorizationStatus.NoAuth}
+                restrictedFor={[AuthorizationStatus.NoAuth, AuthorizationStatus.Unknown]}
                 redirectTo={AppRoute.Login}
               >
                 <Favorites />

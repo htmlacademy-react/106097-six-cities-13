@@ -30,6 +30,14 @@ export function OfferComponent() {
   }, [offerId, dispatch]);
   const offer: Offer | null = useAppSelector(selectors.activeOffer);
   const reviews: Reviews | null = useAppSelector(selectors.reviews);
+  const reviewsToShow = reviews.slice(0, 10);
+  const sortedReviews = reviewsToShow.sort((a, b) => {
+    const bDate = new Date(b.date);
+    const bTime = bDate.getTime();
+    const aDate = new Date(a.date);
+    const aTime = aDate.getTime();
+    return bTime - aTime;
+  });
   const nearbyOffers: Offers | null = useAppSelector(selectors.offersNearby);
   const offersForMap = nearbyOffers.slice(0, MAX_NERBY_OFFERS);
   const offerLoadingStatus = useAppSelector(selectors.offerLoadingStatus);
@@ -136,7 +144,7 @@ export function OfferComponent() {
                     <h2 className="reviews__title">
                       Reviews · <span className="reviews__amount">{reviews.length}</span>
                     </h2>
-                    {reviewsLoadingStatus === RequestStatus.Success ? <ReviewsList reviews={reviews} /> : ''}
+                    {reviewsLoadingStatus === RequestStatus.Success ? <ReviewsList reviews={sortedReviews} /> : ''}
                     {authorizationStatus === AuthorizationStatus.Auth && offerId ? <CommentForm offerId={offerId} /> : ''}
                   </section>
                 </div>

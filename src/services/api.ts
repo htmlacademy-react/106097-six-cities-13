@@ -1,20 +1,8 @@
-import axios, { AxiosInstance, AxiosError, AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios';
 import { StatusCodes } from 'http-status-codes';
-import { toast } from 'react-toastify';
 import { getToken } from './token';
 import browserHistory from '../browser-history';
 import { AppRoute } from '../const';
-
-type DetailMessageType = {
-  type: string;
-  message: string;
-}
-
-const StatusCodeMapping: Record<number, boolean> = {
-  [StatusCodes.BAD_REQUEST]: true,
-  [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
-};
 
 const BACKEND_URL = 'https://13.design.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;

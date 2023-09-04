@@ -1,4 +1,3 @@
-import { Offers } from '../types/offer';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
 import { logoutAction } from '../store/api-actions';
@@ -9,7 +8,7 @@ import { SyntheticEvent } from 'react';
 export function HeaderNavigation() {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(selectors.authorizationStatus);
-  const favoriteOffers: Offers = useAppSelector(selectors.favoriteOffers);
+  const favoriteOffers = useAppSelector(selectors.favoriteOffers);
   const {email, avatarUrl} = useAppSelector(selectors.getUserInfo);
   const handleSignOutClick = (evt: SyntheticEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
@@ -23,9 +22,9 @@ export function HeaderNavigation() {
           ? (
             <>
               <li className="header__nav-item user">
-                <a
+                <Link
                   className="header__nav-link header__nav-link--profile"
-                  href="#"
+                  to={AppRoute.Favorites}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                     <img src={avatarUrl} alt="avatar" style={{borderRadius: '50%'}}/>
@@ -34,7 +33,7 @@ export function HeaderNavigation() {
                     {email}
                   </span>
                   <span className="header__favorite-count">{favoriteOffers.length}</span>
-                </a>
+                </Link>
               </li>
               <li className="header__nav-item">
                 <Link className="header__nav-link" to={AppRoute.Root} onClick={handleSignOutClick}>

@@ -2,12 +2,13 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { DEFAULT_SORT_TYPE, NameSpace, RequestStatus, SortTypes } from '../../const';
 import { OffersData } from '../../types/offers-data';
 import { fetchOfferAction, fetchOffersAction, fetchOffersNearbyAction, fetchReviewsAction } from '../api-actions';
-import { OfferPreview } from '../../types/offer';
 
 const initialState: OffersData = {
   offers: [],
+  nonSortedOffers: [],
   offersSendingStatus: RequestStatus.Idle,
   activeOffer: null,
+  selectedOffer: null,
   offerSendingStatus: RequestStatus.Idle,
   sortType: DEFAULT_SORT_TYPE,
   offersNearby: [],
@@ -20,31 +21,23 @@ export const offersData = createSlice({
   name: NameSpace.Data,
   initialState,
   reducers: {
-    addToFavorites: (state, action: PayloadAction<string>) => {
-      const offer: OfferPreview | undefined = state.offers.find((element: OfferPreview) => element.id === action.payload);
-      if (!offer?.isFavorite && offer?.isFavorite !== undefined) {
-        offer.isFavorite = true;
-      } else if (offer?.isFavorite !== undefined) {
-        offer.isFavorite = false;
-      }
-    },
     selectOffer: (state: OffersData, action: PayloadAction<string>) => {
-      state.activeOffer = action.payload;
+      state.selectedOffer = state.nonSortedOffers.filter((offer) => offer.id === action.payload)[0];
     },
     sort: (state: OffersData, action: PayloadAction<string>) => {
       state.sortType = action.payload;
       switch (action.payload) {
         case SortTypes.LOW_TO_HIGH:
-          state.offers = [...offers].sort((a, b) => a.price - b.price);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => a.price - b.price);
           break;
         case SortTypes.HIGH_TO_LOW:
-          state.offers = [...offers].sort((a, b) => b.price - a.price);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => b.price - a.price);
           break;
         case SortTypes.TOP_RATED:
-          state.offers = [...offers].sort((a, b) => b.rating - a.rating);
+          state.offers = [...state.nonSortedOffers].sort((a, b) => b.rating - a.rating);
           break;
         default:
-          state.offers = offers;
+          state.offers = state.nonSortedOffers;
       }
     },
   },
@@ -56,6 +49,7 @@ export const offersData = createSlice({
       .addCase(fetchOffersAction.fulfilled, (state: OffersData, action) => {
         state.offersSendingStatus = RequestStatus.Success;
         state.offers = action.payload;
+        state.nonSortedOffers = action.payload;
       })
       .addCase(fetchOffersAction.rejected, (state: OffersData) => {
         state.offersSendingStatus = RequestStatus.Error;
@@ -93,4 +87,4 @@ export const offersData = createSlice({
   }
 });
 
-export const { addToFavorites, selectOffer, sort } = offersData.actions;
+export const { selectOffer, sort } = offersData.actions;

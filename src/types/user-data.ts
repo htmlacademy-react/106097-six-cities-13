@@ -1,8 +1,9 @@
-import { AuthorizationStatusType } from './consts';
+import { AuthorizationStatusType, RequestStatusType } from './consts';
 
 export type User = {
   authorizationStatus: AuthorizationStatusType;
   userInfo: UserInfo;
+  sendingStatus: RequestStatusType;
 }
 
 export type UserInfo = {

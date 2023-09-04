@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, Offer, City } from '../types/offer';
+import { Offers, City, OfferPreview, Offer } from '../types/offer';
 
 const URL_MARKER_DEFAULT = '../../public/img/pin.svg';
 const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
@@ -10,12 +10,12 @@ const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
 type MapProps = {
   city: City;
   points: Offers;
-  selectedPoint?: Offer;
+  selectedPoint?: Offer | OfferPreview | null;
   mapHeight: number;
   block: string;
 }
 
-export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
+export function Map({city, selectedPoint, points, mapHeight, block}: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({mapRef, city});
 
@@ -59,7 +59,7 @@ export function Map({city, points, selectedPoint, mapHeight, block}: MapProps) {
         map.removeLayer(placeLayer);
       };
     }
-  }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon]);
+  }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon, city.location.latitude, city.location.longitude, city.location.zoom]);
 
   return (
     <section className={`${block}__map map`} style={{height: `${mapHeight}px` }} ref={mapRef} />
