@@ -1,4 +1,3 @@
-import { Offers } from '../types/offer';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectors } from '../middleware/index';
 import { logoutAction } from '../store/api-actions';
@@ -9,7 +8,7 @@ import { SyntheticEvent } from 'react';
 export function HeaderNavigation() {
   const dispatch = useAppDispatch();
   const authStatus = useAppSelector(selectors.authorizationStatus);
-  const favoriteOffers: Offers = useAppSelector(selectors.favoriteOffers);
+  const favoriteOffers = useAppSelector(selectors.favoriteOffers);
   const {email, avatarUrl} = useAppSelector(selectors.getUserInfo);
   const handleSignOutClick = (evt: SyntheticEvent<HTMLAnchorElement>) => {
     evt.preventDefault();

@@ -1,5 +1,5 @@
 import { RequestStatusType } from './consts';
-import { Offer, Offers } from './offer';
+import { Favorite, Offer } from './offer';
 
 export type FavoritesData = {
   offerId: Offer['id'];
@@ -7,6 +7,6 @@ export type FavoritesData = {
 };
 
 export type Favorites = {
-  favorites: Offers;
+  favorites: Favorite[];
   favoritesSendingStatus: RequestStatusType;
 };

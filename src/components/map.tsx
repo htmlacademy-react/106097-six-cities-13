@@ -59,7 +59,7 @@ export function Map({city, selectedPoint, points, mapHeight, block}: MapProps) {
         map.removeLayer(placeLayer);
       };
     }
-  }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon]);
+  }, [map, points, selectedPoint, defaultCustomIcon, currentCustomIcon, city.location.latitude, city.location.longitude, city.location.zoom]);
 
   return (
     <section className={`${block}__map map`} style={{height: `${mapHeight}px` }} ref={mapRef} />
