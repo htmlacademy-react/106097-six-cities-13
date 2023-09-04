@@ -1,4 +1,4 @@
-import { DEFAULT_ACTIVE_CITY, DEFAULT_SORT_TYPE, SortTypes } from '../../const';
+import { DEFAULT_ACTIVE_CITY } from '../../const';
 import { Interactions } from '../../types/interactions';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';

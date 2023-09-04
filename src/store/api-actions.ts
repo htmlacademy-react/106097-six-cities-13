@@ -117,6 +117,7 @@ export const loginAction = createAsyncThunk<UserInfo, AuthData, Extra>(
     try {
       const {data} = await api.post<UserInfo>(APIRoute.Login, {email, password});
       saveToken(data.token);
+      dispatch(fetchFavoritesAction());
       dispatch(redirectToRoute(AppRoute.Root));
       return data;
     } catch {
