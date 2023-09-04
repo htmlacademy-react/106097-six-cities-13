@@ -19,6 +19,8 @@ export function Homepage() {
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   const city = cityObject?.city;
 
+  const selectedPoint = useAppSelector(selectors.selectedOffer);
+
   if (!filteredOffers) {
     return <HomepageEmpty />;
   }
@@ -49,7 +51,7 @@ export function Homepage() {
               <PlaceCardList offers={filteredOffers} />
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={filteredOffers} mapHeight={500} block={mapClasses.homepage}/>
+              <Map city={city} points={filteredOffers} selectedPoint={selectedPoint} mapHeight={500} block={mapClasses.homepage}/>
             </div>
           </div>
         </div>

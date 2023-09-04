@@ -8,6 +8,7 @@ const initialState: OffersData = {
   nonSortedOffers: [],
   offersSendingStatus: RequestStatus.Idle,
   activeOffer: null,
+  selectedOffer: null,
   offerSendingStatus: RequestStatus.Idle,
   sortType: DEFAULT_SORT_TYPE,
   offersNearby: [],
@@ -21,7 +22,7 @@ export const offersData = createSlice({
   initialState,
   reducers: {
     selectOffer: (state: OffersData, action: PayloadAction<string>) => {
-      state.activeOffer = action.payload;
+      state.selectedOffer = state.nonSortedOffers.filter((offer) => offer.id === action.payload)[0];
     },
     sort: (state: OffersData, action: PayloadAction<string>) => {
       state.sortType = action.payload;

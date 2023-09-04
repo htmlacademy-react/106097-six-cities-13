@@ -8,6 +8,7 @@ export const offersNearbyLoadingStatus = (state: State) => state[NameSpace.Data]
 export const favoriteOffers = (state: State) => state[NameSpace.Favorites].favorites;
 export const favoritesLoadingStatus = (state: State) => state[NameSpace.Favorites].favoritesSendingStatus;
 export const activeOffer = (state: State) => state[NameSpace.Data].activeOffer;
+export const selectedOffer = (state: State) => state[NameSpace.Data].selectedOffer;
 export const offerLoadingStatus = (state: State) => state[NameSpace.Data].offerSendingStatus;
 export const sortType = (state: State) => state[NameSpace.Data].sortType;
 export const activeCity = (state: State) => state[NameSpace.Interactions].city;
