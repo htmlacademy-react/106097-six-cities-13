@@ -1,7 +1,9 @@
 import { FormEvent, Fragment, useState } from 'react';
 import { ChangeEvent } from 'react';
-import { useAppDispatch } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { postReview } from '../store/api-actions';
+import { selectors } from '../middleware';
+import { RequestStatus } from '../const';
 
 const MIN_COMMENTS_LENGTH = 50;
 const MAX_COMMENTS_LENGTH = 500;
@@ -22,7 +24,7 @@ type CommentFormProps = {
 export function CommentForm({offerId}: CommentFormProps) {
   const [reviewData, setReviewData] = useState({
     rating: MIN_RATING,
-    review: '',
+    comment: '',
   });
 
   const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +32,11 @@ export function CommentForm({offerId}: CommentFormProps) {
   };
 
   const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setReviewData({...reviewData, review: evt.target.value});
+    setReviewData({...reviewData, comment: evt.target.value});
   };
 
-  const isValid = reviewData.review.length >= MIN_COMMENTS_LENGTH
-  && reviewData.review.length <= MAX_COMMENTS_LENGTH;
+  const isValid = reviewData.comment.length >= MIN_COMMENTS_LENGTH
+  && reviewData.comment.length <= MAX_COMMENTS_LENGTH;
 
   const dispatch = useAppDispatch();
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
@@ -45,6 +47,14 @@ export function CommentForm({offerId}: CommentFormProps) {
     dispatch(postReview({reviewData, offerId}));
   };
 
+  const dataSendingStatus = useAppSelector(selectors.reviewPostStatus);
+  let isSubmitButtonDisable = true;
+  if (isValid) {
+    isSubmitButtonDisable = false;
+  }
+  if (dataSendingStatus === RequestStatus.Pending) {
+    isSubmitButtonDisable = true;
+  }
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
@@ -82,7 +92,9 @@ export function CommentForm({offerId}: CommentFormProps) {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewChange}
-        value={reviewData.review}
+        value={reviewData.comment}
+        minLength={50}
+        maxLength={300}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -94,9 +106,9 @@ export function CommentForm({offerId}: CommentFormProps) {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid}
+          disabled={isSubmitButtonDisable}
         >
-          Submit
+          {dataSendingStatus === RequestStatus.Pending ? 'Sending...' : 'Submit'}
         </button>
       </div>
     </form>

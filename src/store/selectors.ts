@@ -15,4 +15,5 @@ export const activeCity = (state: State) => state[NameSpace.Interactions].city;
 export const authorizationStatus = (state: State) => state[NameSpace.User].authorizationStatus;
 export const reviews = (state: State) => state[NameSpace.Data].reviews;
 export const reviewsLoadingStatus = (state: State) => state[NameSpace.Data].reviewsSendingStatus;
+export const reviewPostStatus = (state: State) => state[NameSpace.Interactions].postReviewStatus;
 export const getUserInfo = (state: State) => state[NameSpace.User].userInfo;

@@ -16,5 +16,5 @@ export type Reviews = Review[];
 
 export type ReviewData = {
   rating: number;
-  review: string;
+  comment: string;
 };
