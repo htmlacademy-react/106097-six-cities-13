@@ -7,16 +7,8 @@ import { Favorites } from '../pages/favorites';
 import { PrivateRoute } from './private-route';
 import { HelmetProvider } from 'react-helmet-async';
 import { OfferComponent } from '../pages/offer';
-import { useAppDispatch } from '../hooks';
-import { fetchFavoritesAction } from '../store/api-actions';
-import { useEffect } from 'react';
 
 export function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFavoritesAction());
-  }, [dispatch]);
 
   return (
     <HelmetProvider>

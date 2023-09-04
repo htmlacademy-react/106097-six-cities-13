@@ -10,7 +10,6 @@ import { selectors } from '../middleware/index';
 import { Loading } from '../components/loading';
 import { NotFound } from './not-found';
 import { HomepageEmpty } from './homepage-empty';
-import {toast} from 'react-toastify';
 
 export function Homepage() {
   const offers = useAppSelector(selectors.offers);
@@ -19,10 +18,6 @@ export function Homepage() {
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const cityObject = offers.find((offer) => offer.city.name === activeCity);
   const city = cityObject?.city;
-  if (city === undefined) {
-    toast.error('Can\'t find selected city.');
-    return <Loading />;
-  }
 
   if (!filteredOffers) {
     return <HomepageEmpty />;
