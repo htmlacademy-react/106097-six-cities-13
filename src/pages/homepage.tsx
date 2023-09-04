@@ -51,7 +51,9 @@ export function Homepage() {
               <PlaceCardList offers={filteredOffers} />
             </section>
             <div className="cities__right-section">
-              <Map city={city} points={filteredOffers} selectedPoint={selectedPoint} mapHeight={500} block={mapClasses.homepage}/>
+              {city
+                ? <Map city={city} points={filteredOffers} selectedPoint={selectedPoint} mapHeight={500} block={mapClasses.homepage}/>
+                : ''}
             </div>
           </div>
         </div>

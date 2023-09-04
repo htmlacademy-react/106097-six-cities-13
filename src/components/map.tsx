@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import leaflet, { layerGroup } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useMap } from '../hooks/use-map';
-import { Offers, City, OfferPreview } from '../types/offer';
+import { Offers, City, OfferPreview, Offer } from '../types/offer';
 
 const URL_MARKER_DEFAULT = '../../public/img/pin.svg';
 const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
@@ -10,7 +10,7 @@ const URL_MARKER_CURRENT = '../../public/img/pin-active.svg';
 type MapProps = {
   city: City;
   points: Offers;
-  selectedPoint?: OfferPreview | null;
+  selectedPoint?: Offer | OfferPreview | null;
   mapHeight: number;
   block: string;
 }

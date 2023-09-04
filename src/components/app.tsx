@@ -17,7 +17,14 @@ export function App() {
           <Route index element={<Homepage/>} />
           <Route
             path={AppRoute.Login}
-            element={<Login />}
+            element={
+              <PrivateRoute
+                restrictedFor={[AuthorizationStatus.Auth]}
+                redirectTo={AppRoute.Root}
+              >
+                <Login />
+              </PrivateRoute>
+            }
           />
           <Route
             path={AppRoute.Favorites}

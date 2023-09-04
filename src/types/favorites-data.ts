@@ -1,5 +1,5 @@
 import { RequestStatusType } from './consts';
-import { Offer } from './offer';
+import { Offer, Offers } from './offer';
 
 export type FavoritesData = {
   offerId: Offer['id'];
